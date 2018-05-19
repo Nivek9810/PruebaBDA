@@ -1,0 +1,84 @@
+[33mcommit 90c0963ddb25614f7069064d8ccc4a1c2958c027[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Carol Mendoza <carolmendovargas@gmail.com>
+Date:   Sat May 19 11:32:04 2018 -0500
+
+    Agrego clase empleado
+
+[33mcommit 04f47ff6e38e0c2bb9ea91469e392799358b9c77[m
+Author: Carol Mendoza <carolmendovargas@gmail.com>
+Date:   Fri May 18 14:59:20 2018 -0500
+
+    Se agregó la clase Persona
+
+[33mcommit 9372b1ea730c754a6beec91e5bf6c513437ef40a[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Nivek Guacaneme L <nivek9810@gmail.com>
+Date:   Sun May 13 19:51:03 2018 -0500
+
+    Se ha dejado una sola versión
+
+[33mcommit f6624ee0c1f452e5be0608f761ff2828566b47b4[m
+Merge: 041e457 e8db5e5
+Author: Nivek Guacaneme L <nivek9810@gmail.com>
+Date:   Sun May 13 19:48:45 2018 -0500
+
+    Nuevo cambio
+
+[33mcommit e8db5e5474ac7133d68c8542399ed1dd13eb51d9[m
+Author: Nivek Guacaneme L <nivek9810@gmail.com>
+Date:   Sun May 13 19:45:21 2018 -0500
+
+    Cambie un subtitulo
+
+[33mcommit 041e4576e9121fed29364e041c818ae7d21836d9[m
+Author: Nivek Guacaneme L <nivek9810@gmail.com>
+Date:   Sun May 13 19:18:50 2018 -0500
+
+    Solo agregué lo de cartagena
+
+[33mcommit 55dac6f9fe690951970d14ab41986103740b40e0[m[33m ([m[1;31morigin/NeilLeyton-Bogotá[m[33m, [m[1;31morigin/Nahomi2310-Bogotá[m[33m, [m[1;31morigin/JessiToro-Bogotá[m[33m)[m
+Author: Nivek Guacaneme L <nivek9810@gmail.com>
+Date:   Fri May 4 20:19:49 2018 -0500
+
+    Cambio en la estructura de los botones en Categoria de Habitación
+
+[33mcommit b8165ad560fabc51b7443cf6681041eea79d4abc[m
+Author: Nivek Guacaneme L <nivek9810@gmail.com>
+Date:   Fri May 4 19:14:50 2018 -0500
+
+    Modificacion de Contenido visual
+
+[33mcommit e0ca73e1e8cb6f05da1e320bce72710a0f439823[m
+Author: Nivek Guacaneme L <nivek9810@gmail.com>
+Date:   Fri May 4 18:53:29 2018 -0500
+
+    Estandarización de lo planteado en el informe preliminar
+
+[33mcommit ef502c7d480aae9d5d676760b33439728728fdd7[m
+Author: Nivek Guacaneme L <nivek9810@gmail.com>
+Date:   Fri May 4 00:08:15 2018 -0500
+
+    Prueba de funcionamiento
+
+[33mcommit c97510f0ddc2b12ccf6493c32531536fe2cc36ea[m
+Author: Nivek Guacaneme L <nivek9810@gmail.com>
+Date:   Thu May 3 19:52:18 2018 -0500
+
+    Se han modificado los titulos y el orden en quienes somos
+
+[33mcommit 8a00d301d33fd221204c1570257ee6f3feb3bf35[m
+Author: Nivek Guacaneme L <nivek9810@gmail.com>
+Date:   Thu May 3 19:44:57 2018 -0500
+
+    Modificacion de titulos
+
+[33mcommit cf829ead32ed198e6d1074ebc06e596042485124[m
+Author: Nivek Guacaneme L <nivek9810@gmail.com>
+Date:   Thu May 3 15:48:17 2018 -0500
+
+    Primer Commit
+
+[33mcommit 2a5055585f862f80a22f9993f647b7cf0c555c24[m
+Author: Kevin <Nivek9810@users.noreply.github.com>
+Date:   Thu May 3 15:41:16 2018 -0500
+
+    Initial commit

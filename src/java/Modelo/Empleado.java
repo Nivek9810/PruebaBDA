@@ -11,17 +11,17 @@ package Modelo;
  */
 public class Empleado {
     
-    private Integer Id_empleado ;
+    private Integer Id_Empleado ;
     private Integer Cargo ;
     private String Contrasena ;
-    private Integer Id_personaFK ;
+    private Integer Id_PersonaFK ;
 
-    public Integer getId_empleado() {
-        return Id_empleado;
+    public Integer getId_Empleado() {
+        return Id_Empleado;
     }
 
-    public void setId_empleado(Integer Id_empleado) {
-        this.Id_empleado = Id_empleado;
+    public void setId_Empleado(Integer Id_Empleado) {
+        this.Id_Empleado = Id_Empleado;
     }
 
     public Integer getCargo() {
@@ -40,14 +40,14 @@ public class Empleado {
         this.Contrasena = Contrasena;
     }
 
-    public Integer getId_personaFK() {
-        return Id_personaFK;
+    public Integer getId_PersonaFK() {
+        return Id_PersonaFK;
     }
 
-    public void setId_personaFK(Integer Id_personaFK) {
-        this.Id_personaFK = Id_personaFK;
+    public void setId_PersonaFK(Integer Id_PersonaFK) {
+        this.Id_PersonaFK = Id_PersonaFK;
     }
-    
+
     
     
     
