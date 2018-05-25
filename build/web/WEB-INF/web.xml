@@ -2,11 +2,19 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>Enviar</servlet-name>
-        <servlet-class>Enviar</servlet-class>
+        <servlet-class>Controlador.Enviar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletSesionL</servlet-name>
+        <servlet-class>Controlador.ServletSesionL</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Enviar</servlet-name>
         <url-pattern>/Enviar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletSesionL</servlet-name>
+        <url-pattern>/ServletSesionL</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

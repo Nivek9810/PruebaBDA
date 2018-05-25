@@ -1,9 +1,12 @@
+<%-- 
+    Document   : index
+    Created on : 24-may-2018, 19:48:55
+    Author     : user
+--%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Modelo.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html lang="es">
     <head>
         <title>Prueba BDA</title>
@@ -13,7 +16,16 @@ and open the template in the editor.
     </head>
     <body>
         <div class="container">
-            <h1 class="display-4">Prueba BDA</h1> <br>
+            <h1 class="display-4">Prueba BDA <% try {
+                    HttpSession sessionStatus = request.getSession();
+                    if (sessionStatus.getAttribute("usuario") != null) {
+                        out.print(" | " + sessionStatus.getAttribute("usuario"));
+                    } else {
+                        //response.sendRedirect("index.jsp");
+                        out.print("");
+                    }
+
+                %></h1> <br>
             <div class="row">
                 <div class="col-3">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -34,18 +46,31 @@ and open the template in the editor.
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contactenos</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#login" role="tab" aria-controls="contact" aria-selected="false">Login</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#registrarse" role="tab" aria-controls="contact" aria-selected="false">Registrarse</a>
-                                </li>
+
+                                <%if (session.getAttribute("usuario") != null) {%>
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#reserva" role="tab" aria-controls="contact" aria-selected="false">Reserva</a>
-                                </li>
+                                   </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#servicios" role="tab" aria-controls="contact" aria-selected="false">Servicios</a>
                                 </li>
+                                <%} else {%>
+                                
+                                    <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#login" role="tab" aria-controls="contact" aria-selected="false">Login</a>
+                                        
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#registrarse" role="tab" aria-controls="contact" aria-selected="false">Registrarse</a>
+                                </li>
+                                <%}%>
+
+                                <%} catch (Exception e) {
+                                        response.sendRedirect("index.jsp");
+                                    }
+
+                                %>
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <br>
@@ -129,13 +154,135 @@ and open the template in the editor.
                                     </script>
                                 </div>
                                 <div class="tab-pane fade" id="login" role="tabpanel" aria-labelledby="profile-tab">
-                                    Log
+                                                  <h1><i>Bienvenido</i></h1>
+                                    <form action="ServletSesionL" method="POST">
+                                        <div>
+                                            <img src="Img/user.png" width="200" align="left" /> 
+
+                                        </div>
+                                        <label>User</label> <input type="text" name="user" value="usuario" /><br><br>
+                                        <label>Pass</label> <input type="password" name="password" value="contraseña" /><br><br>
+
+                                        <input type="submit" value="Enviar" >
+                                        <br><br>
+
+
+                                    </form>
                                 </div>
                                 <div class="tab-pane fade" id="registrarse" role="tabpanel" aria-labelledby="profile-tab">
-                                    Reg
+                                    <form method="POST" action="Enviar">
+                                        <div class="form-row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationDefault01">Nombre</label>
+                                                <input type="text" class="form-control" name="nombre" id="validationDefault01" placeholder="Nombre(s)" required>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationDefault02">Apellido</label>
+                                                <input type="text" class="form-control" name="apellido" id="validationDefault02" placeholder="Apellido(s)" required>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="select01">Nacionalidad</label>
+                                                <select id="select01" class="custom-select" name="nacionalidad">
+                                                    <option selected>Selecciona una nacionalidad</option>
+                                                    <%                                                        DAO_Persona obj_Per = new DAO_Persona();
+                                                        ArrayList<DTO_Nacionalidad> lista = obj_Per.listarNacionalidad();
+                                                        for (int idx = 0; idx < lista.size(); idx++) {
+                                                    %>
+                                                    <option value="<% out.print(lista.get(idx).getId_Nacio()); %>"><% out.print(lista.get(idx).getPais_Origen());  %></option>
+                                                    <%                                                        }
+                                                    %>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-4 mb-2">
+                                                <label for="selectTipo">Tipo de documento</label>
+                                                <select id="selectTipo" class="custom-select" name="tipodoc">
+
+                                                    <option selected>Tipo de Documento</option>
+                                                    <%
+                                                        ArrayList<DTO_Tipo_Doc> listaD = obj_Per.listarTipoDoc();
+                                                        for (int idy = 0; idy < listaD.size(); idy++) {
+                                                    %>
+                                                    <option value="<% out.print(listaD.get(idy).getId_Tipo_Doc()); %>"><% out.print(listaD.get(idy).getTipo_Docu());  %></option>
+                                                    <%                                                        }
+                                                    %>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <label for="doc">Documento:</label>
+                                                <input type="number" id="doc" class="form-control" placeholder="Ingresa el documento" required name="doc">
+                                            </div>                                            
+                                            <div class="col-md-4 mb-2">
+                                                <label for="Correo">Correo</label>
+                                                <input type="email" id="Correo" class="form-control" placeholder="Digite su correo" required name="correo">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        
+
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Registrarse</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>¿Has enviado todos los datos?</p>
+                                                        <hr>
+                                                        <p>De ser cierto, te llegará un correo que te permitirá acceder a la plataforma, allí te enviaremos tu nueva contraseña.</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerar</button>
+                                                        <button type="submit" class="btn btn-primary">Aceptar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enviar</button>
                                 </div>
                                 <div class="tab-pane fade" id="reserva" role="tabpanel" aria-labelledby="profile-tab">
-                                    Res
+                                     <div class="form-group col-md-6">
+                                                <label for="inputState">Tipo Habitacion</label>
+                                                <select id="inputState" class="form-control">
+                                                    <option selected>Habitacion Estandar</option>
+                                                    <option>Habitacion Doble</option>
+                                                    <option>Habitacion Triple</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                Fecha de Inicio<input type="date" class="form-control ">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                Fecha de Salida<input type="date" class="form-control ">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                Numero de Personas
+                                                <select id="inputState" class="form-control">
+                                                    <option selected>1 </option>
+                                                    <option>2 </option>
+                                                    <option>3 </option>
+                                                    <option>4 </option>
+                                                    <option>5 </option>
+                                                </select>
+                                            </div>
+                                            <br><br>
+                                            <div class="form-group col-md-4">  
+                                                <button type="submit" class="btn btn-primary" >Reservar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                    <form  method="GET" action="Enviar">
+                                        <input type="text" name="enviar" value="Si" hidden>
+                                        <input type="submit" class="btn-primary" value="Salir">            
+                                    </form>
                                 </div>
                                 <div class="tab-pane fade" id="servicios" role="tabpanel" aria-labelledby="profile-tab">
                                     Ser
@@ -222,3 +369,4 @@ and open the template in the editor.
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     </body>
 </html>
+

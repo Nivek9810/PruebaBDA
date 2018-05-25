@@ -15,6 +15,24 @@ public class DTO_Persona {
     private Integer Id_Tipo_Documento;
     private String Nombre, Correo;
 
+    public DTO_Persona() {
+        this.Id_persona = 0;
+        this.Id_Nacionalidad = 0;
+        this.Id_Tipo_Documento = 0;
+        this.Nombre = "";
+        this.Correo = "";
+    }
+ 
+    
+    public DTO_Persona(Integer Id_persona, Integer Id_Nacionalidad, Integer Id_Tipo_Documento, String Nombre, String Correo) {
+        this.Id_persona = Id_persona;
+        this.Id_Nacionalidad = Id_Nacionalidad;
+        this.Id_Tipo_Documento = Id_Tipo_Documento;
+        this.Nombre = Nombre;
+        this.Correo = Correo;
+    }
+
+    
     public Integer getId_persona() {
         return Id_persona;
     }
