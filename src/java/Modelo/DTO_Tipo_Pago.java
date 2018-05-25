@@ -9,7 +9,7 @@ package Modelo;
  *
  * @author Familia MV
  */
-public class Tipo_Pago {
+public class DTO_Tipo_Pago {
     
     
     private Integer Id_Tipo_Pago;

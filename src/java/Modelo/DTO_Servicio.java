@@ -9,7 +9,7 @@ package Modelo;
  *
  * @author Familia MV
  */
-public class Servicio {
+public class DTO_Servicio {
     private Integer Id_Servicio;
     private Integer Id_Noms;
     private Integer Id_Categoria;

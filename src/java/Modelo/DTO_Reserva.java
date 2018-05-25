@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author Familia MV
  */
-public class Reserva {
+public class DTO_Reserva {
     
     private Integer Id_Reserva;
     private Float Pago;

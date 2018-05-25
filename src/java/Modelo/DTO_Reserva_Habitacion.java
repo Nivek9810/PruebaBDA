@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Familia MV
  */
-public class Reserva_Habitacion {
+public class DTO_Reserva_Habitacion {
     
     private Integer Id_ReservaFK;
     private Integer Nro_HabitacionFK;
