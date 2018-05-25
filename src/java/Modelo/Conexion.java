@@ -22,7 +22,7 @@ public class Conexion {
             Class.forName("org.postgresql.Driver").newInstance();
             String url = "jdbc:postgresql://localhost:5432/hospedajereal";
             String user = "postgres";
-            String pass = "KevinNivek11";
+            String pass = "123456";
                 db_conn = DriverManager.getConnection(url,user,pass);  
                 if((db_conn != null)&&(!db_conn.isClosed()))
             {

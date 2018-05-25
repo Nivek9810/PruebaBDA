@@ -44,14 +44,21 @@ public class DAO_Persona {
         this.statement = conection.createStatement();
     }
 
-    public DTO_Persona crearUsuario(Integer id_persona, Integer id_nacionalidad, Integer Id_Tipo_Doc, String nombre, String correo) throws SQLException {
-        String consulta = "INSERT INTO PERSONA Values (" + id_persona + ", " + id_nacionalidad + ", " + Id_Tipo_Doc + ", '" + nombre + "', '" + correo + "');";
-        int r = statement.executeUpdate(consulta);
-        if (r > 0) {
-            obj_Persona = new DTO_Persona(id_persona, id_nacionalidad, Id_Tipo_Doc, nombre, correo);
-        } else {
-            obj_Persona = null;
+    public DTO_Persona crearUsuario(String id_persona, Integer id_nacionalidad, Integer Id_Tipo_Doc, String nombre, String correo) throws SQLException {
+        String Verificacion = "SELECT * FROM PERSONA WHERE correo = '" + correo + "'";
+        String consulta = "INSERT INTO PERSONA Values ('" + id_persona + "', " + id_nacionalidad + ", " + Id_Tipo_Doc + ", '" + nombre + "', '" + correo + "');";
+        Statement stVerificacion = conection.createStatement();
+        ResultSet resultado = statement.executeQuery(Verificacion);
+        
+        while (!resultado.next()) {
+            int r = statement.executeUpdate(consulta);
+            if (r > 0) {
+                obj_Persona = new DTO_Persona(id_persona, id_nacionalidad, Id_Tipo_Doc, nombre, correo);
+            } else {
+                obj_Persona = null;
+            }
         }
+
         return obj_Persona;
     }
 
@@ -65,14 +72,14 @@ public class DAO_Persona {
 
         return lst_Nacionalidad;
     }
-    
+
     public ArrayList<DTO_Tipo_Doc> listarTipoDoc() throws SQLException {
         lst_TipoDoc.clear();
         String consulta = "SELECT * FROM TIPO_DOC;";
         resultSet = statement.executeQuery(consulta);
-        while (resultSet.next()) {            
+        while (resultSet.next()) {
             lst_TipoDoc.add(new DTO_Tipo_Doc(resultSet.getInt("Id_Tipo_Doc"), resultSet.getString("Tipo_Docu")));
         }
-        return lst_TipoDoc;             
+        return lst_TipoDoc;
     }
 }

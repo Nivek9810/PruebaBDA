@@ -10,13 +10,13 @@ package Modelo;
  * @author Familia MV
  */
 public class DTO_Persona {
-    private Integer Id_persona ;
+    private String Id_persona ;
     private Integer Id_Nacionalidad;
     private Integer Id_Tipo_Documento;
     private String Nombre, Correo;
 
     public DTO_Persona() {
-        this.Id_persona = 0;
+        this.Id_persona = "";
         this.Id_Nacionalidad = 0;
         this.Id_Tipo_Documento = 0;
         this.Nombre = "";
@@ -24,7 +24,7 @@ public class DTO_Persona {
     }
  
     
-    public DTO_Persona(Integer Id_persona, Integer Id_Nacionalidad, Integer Id_Tipo_Documento, String Nombre, String Correo) {
+    public DTO_Persona(String Id_persona, Integer Id_Nacionalidad, Integer Id_Tipo_Documento, String Nombre, String Correo) {
         this.Id_persona = Id_persona;
         this.Id_Nacionalidad = Id_Nacionalidad;
         this.Id_Tipo_Documento = Id_Tipo_Documento;
@@ -33,11 +33,11 @@ public class DTO_Persona {
     }
 
     
-    public Integer getId_persona() {
+    public String getId_persona() {
         return Id_persona;
     }
 
-    public void setId_persona(Integer Id_persona) {
+    public void setId_persona(String Id_persona) {
         this.Id_persona = Id_persona;
     }
 

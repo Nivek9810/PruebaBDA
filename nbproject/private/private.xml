@@ -3,14 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/Correo.java</file>
-            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Controlador/Enviar.java</file>
-            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/GeneradorPass.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/DAO_Persona.java</file>
             <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/web/index.jsp</file>
-=======
-            <file>file:/C:/Users/Familia%20MV/Documents/GitHub/PruebaBDA/src/java/Modelo/Tipo_Pago.java</file>
->>>>>>> 227e7e5685bed6dd83f74f3eb10693edd30848fc
+            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/Conexion.java</file>
         </group>
     </open-files>
 </project-private>
