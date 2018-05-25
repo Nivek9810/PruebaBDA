@@ -9,7 +9,7 @@ package Modelo;
  *
  * @author Familia MV
  */
-public class Habitacion {
+public class DTO_Habitacion {
     private Integer Nro_Habitacion;
     private Integer Id_Tipo;
     private float Valor_Habitacion;

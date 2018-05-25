@@ -20,6 +20,7 @@ public class DAO_Persona {
     private DTO_Persona obj_Persona;
     private ArrayList<DTO_Nacionalidad> lst_Nacionalidad;
     private ArrayList<DTO_Tipo_Doc> lst_TipoDoc;
+    
     private Statement statement;
     private Conexion con;
     private ResultSet resultSet;
@@ -47,10 +48,9 @@ public class DAO_Persona {
     public DTO_Persona crearUsuario(String id_persona, Integer id_nacionalidad, Integer Id_Tipo_Doc, String nombre, String correo) throws SQLException {
         String Verificacion = "SELECT * FROM PERSONA WHERE correo = '" + correo + "'";
         String consulta = "INSERT INTO PERSONA Values ('" + id_persona + "', " + id_nacionalidad + ", " + Id_Tipo_Doc + ", '" + nombre + "', '" + correo + "');";
-        Statement stVerificacion = conection.createStatement();
         ResultSet resultado = statement.executeQuery(Verificacion);
         
-        while (!resultado.next()) {
+        if (!resultado.next()) {
             int r = statement.executeUpdate(consulta);
             if (r > 0) {
                 obj_Persona = new DTO_Persona(id_persona, id_nacionalidad, Id_Tipo_Doc, nombre, correo);
