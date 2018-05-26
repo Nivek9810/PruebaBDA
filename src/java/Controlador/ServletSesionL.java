@@ -6,7 +6,11 @@
 package Controlador;
 
 import Modelo.DAO_Cliente;
+import Modelo.DAO_Empleado;
+import Modelo.DAO_Persona;
 import Modelo.DTO_Cliente;
+import Modelo.DTO_Empleado;
+import Modelo.DTO_Persona;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -26,7 +30,7 @@ public class ServletSesionL extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
         }
     }
 
@@ -59,19 +63,29 @@ public class ServletSesionL extends HttpServlet {
         try {
             HttpSession sesion = request.getSession();
             DAO_Cliente Login = new DAO_Cliente();
+            DAO_Empleado objEmpDAO = new DAO_Empleado();
+            DAO_Persona objPerDAO = new DAO_Persona();
             String usu, pass;
             usu = request.getParameter("user");
             pass = request.getParameter("password");
             DTO_Cliente Usuario = Login.SessionU(usu, pass);
+            DTO_Empleado objEmp = objEmpDAO.SessionE(usu, pass);
             
-            
+            DTO_Persona objPerE = objPerDAO.infoUser(objEmp.getId_PersonaFK());
+            DTO_Persona objPerU = objPerDAO.infoUser(Usuario.getId_PerosonaFK());
+
             if (usu.equals(Usuario.getId_Cliente()) && pass.equals(Usuario.getContrasenaC()) && sesion.getAttribute("cliente") == null) {
                 //si coincide usuario y password y además no hay sesión iniciada
-                sesion.setAttribute("cliente", Usuario.getId_Cliente());                
+                sesion.setAttribute("cliente", objPerU.getNombre());
                 sesion.setMaxInactiveInterval(60);
                 //redirijo a página con información de login exitoso
-            
                 response.sendRedirect("index.jsp");
+
+            } else if (Integer.parseInt(usu) == objEmp.getId_Empleado() && pass.equals(objEmp.getContrasena()) && sesion.getAttribute("cliente") == null) {
+                sesion.setAttribute("cliente", objPerE.getNombre());
+                sesion.setMaxInactiveInterval(60);
+                response.sendRedirect("index.jsp");
+
             } else {
                 response.sendRedirect("index.jsp");
                 sesion.invalidate();
@@ -93,6 +107,7 @@ public class ServletSesionL extends HttpServlet {
         }
         processRequest(request, response);
     }
+
     /**
      * Returns a short description of the servlet.
      *

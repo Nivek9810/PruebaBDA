@@ -296,8 +296,7 @@
                                             </div>
                                         </div>
                                         <br>
-
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="registroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -319,7 +318,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#registroModal">Enviar</button>
                                 </div>
                                 <div class="tab-pane fade" id="reserva" role="tabpanel" aria-labelledby="profile-tab">
                                     <form method="POST" enctype="multipart/form-data">
@@ -364,6 +363,7 @@
                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                             <div class="card-deck">
                                 <div class="card-deck">
+                                    <% %>
                                     <div class="card">
                                         <img class="card-img-top" src="Img/habitacion.jpg" alt="Card image cap">
                                         <div class="card-body">

@@ -12,17 +12,17 @@ package Modelo;
 public class DTO_Cliente {
     private String Id_Cliente ;
     private String ContrasenaC ;
-    private Integer Id_PerosonaFK ;
+    private String Id_PerosonaFK ;
     private Integer Nro_Habitacion ;
 
     public DTO_Cliente() {
         this.Id_Cliente = "";
         this.ContrasenaC = "";
-        this.Id_PerosonaFK = 0;
+        this.Id_PerosonaFK = "";
         this.Nro_Habitacion = 0;
     }
 
-    public DTO_Cliente(String Id_Cliente, String ContrasenaC, Integer Id_PerosonaFK, Integer Nro_Habitacion) {
+    public DTO_Cliente(String Id_Cliente, String ContrasenaC, String Id_PerosonaFK, Integer Nro_Habitacion) {
         this.Id_Cliente = Id_Cliente;
         this.ContrasenaC = ContrasenaC;
         this.Id_PerosonaFK = Id_PerosonaFK;
@@ -49,11 +49,11 @@ public class DTO_Cliente {
         this.ContrasenaC = ContrasenaC;
     }
 
-    public Integer getId_PerosonaFK() {
+    public String getId_PerosonaFK() {
         return Id_PerosonaFK;
     }
 
-    public void setId_PerosonaFK(Integer Id_PerosonaFK) {
+    public void setId_PerosonaFK(String Id_PerosonaFK) {
         this.Id_PerosonaFK = Id_PerosonaFK;
     }
 

@@ -14,7 +14,23 @@ public class DTO_Empleado {
     private Integer Id_Empleado ;
     private Integer Cargo ;
     private String Contrasena ;
-    private Integer Id_PersonaFK ;
+    private String Id_PersonaFK ;
+
+    public DTO_Empleado() {
+        this.Id_Empleado = 0;
+        this.Cargo = 0;
+        this.Contrasena = "";
+        this.Id_PersonaFK = "";
+    }
+
+    public DTO_Empleado(Integer Id_Empleado, Integer Cargo, String Contrasena, String Id_PersonaFK) {
+        this.Id_Empleado = Id_Empleado;
+        this.Cargo = Cargo;
+        this.Contrasena = Contrasena;
+        this.Id_PersonaFK = Id_PersonaFK;
+    }
+    
+    
 
     public Integer getId_Empleado() {
         return Id_Empleado;
@@ -40,11 +56,11 @@ public class DTO_Empleado {
         this.Contrasena = Contrasena;
     }
 
-    public Integer getId_PersonaFK() {
+    public String getId_PersonaFK() {
         return Id_PersonaFK;
     }
 
-    public void setId_PersonaFK(Integer Id_PersonaFK) {
+    public void setId_PersonaFK(String Id_PersonaFK) {
         this.Id_PersonaFK = Id_PersonaFK;
     }
 

@@ -82,4 +82,17 @@ public class DAO_Persona {
         }
         return lst_TipoDoc;
     }
+    
+    public DTO_Persona infoUser(String persona) throws SQLException {
+        String query = "SELECT * FROM persona WHERE id_persona='" + persona + "';";
+        resultSet = statement.executeQuery(query);
+        while (resultSet.next()) {
+            this.obj_Persona.setNombre(resultSet.getString("nombre"));
+            this.obj_Persona.setCorreo(resultSet.getString("correo"));
+            this.obj_Persona.setId_Nacionalidad(resultSet.getInt("id_tipo_doc"));
+            this.obj_Persona.setId_persona(resultSet.getString("id_persona"));
+            this.obj_Persona.setId_Nacionalidad(resultSet.getInt("id_nacio"));
+        }
+        return obj_Persona ;
+    }
 }

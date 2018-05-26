@@ -20,7 +20,6 @@ public class DAO_Cliente {
     private Conexion con;
     private ResultSet resultSet;
     private Connection conection;
-    
 
     public DAO_Cliente(DTO_Cliente User, Statement statement, Email enviarE, Conexion con, ResultSet resultSet, Connection conection) {
         this.User = User;
@@ -29,7 +28,7 @@ public class DAO_Cliente {
         this.con = con;
         this.resultSet = resultSet;
         this.conection = conection;
-    
+
     }
 
     public DAO_Cliente() throws SQLException {
@@ -40,7 +39,7 @@ public class DAO_Cliente {
         this.conection = con.getConnection();
         this.User = new DTO_Cliente();
         this.statement = conection.createStatement();
-        
+
     }
 
     public DTO_Cliente SessionU(String User, String Pass) throws SQLException {
@@ -48,16 +47,18 @@ public class DAO_Cliente {
         String query = "SELECT * FROM cliente WHERE id_cliente='" + User + "' AND contrasenac='" + Pass + "';";
         resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
-            
+
             this.User.setId_Cliente(resultSet.getString("id_cliente"));
             this.User.setContrasenaC(resultSet.getString("contrasenac"));
-           
+            this.User.setId_PerosonaFK(resultSet.getString("id_persona"));
+            this.User.setNro_Habitacion(resultSet.getInt("nro_habitacion"));
+
         }
         return this.User;
     }
 
     public boolean CambiarContra(String User, String Pass, String PassAnt) throws SQLException {
-            String Sql = "SELECT * FROM cliente WHERE  contrasenac = '" + PassAnt + "' AND id_cliente ='" + User + "';";
+        String Sql = "SELECT * FROM cliente WHERE  contrasenac = '" + PassAnt + "' AND id_cliente ='" + User + "';";
         resultSet = statement.executeQuery(Sql);
         Statement statementUPD = conection.createStatement();
         boolean Resp = false;
