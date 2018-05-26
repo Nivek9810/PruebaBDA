@@ -44,7 +44,7 @@ public class DAO_Cliente {
 
     public DTO_Cliente SessionU(String User, String Pass) throws SQLException {
 
-        String query = "SELECT * FROM cliente WHERE id_cliente='" + User + "' AND contrasenac='" + Pass + "';";
+        String query = "SELECT * FROM cliente WHERE id_persona='" + User + "' AND contrasenac='" + Pass + "';";
         resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
 
@@ -64,11 +64,8 @@ public class DAO_Cliente {
         boolean Resp = false;
         while (resultSet.next()) {
             String Query = "UPDATE cliente SET contrasenac = '" + Pass + "' WHERE id_cliente ='" + User + "';";
-            int res = statementUPD.executeUpdate(Query);
-            /*if (res > 0) {
-                enviarE.enviarCorreo(Mail, "Se ha modificado correctamente su nueva contraseña: " + Pass.substring(0, 2) + "**** ", "Contraseña nueva", null);
-                Resp = true;
-            }*/
+            statementUPD.executeUpdate(Query);
+            Resp = true;
         }
         return Resp;
     }

@@ -22,7 +22,7 @@
                         out.print(" | " + sessionStatus.getAttribute("usuario"));
                     } else if (sessionStatus.getAttribute("cliente") != null) {
                         out.print(" | " + sessionStatus.getAttribute("cliente"));
-                    }else {
+                    } else {
                         //response.sendRedirect("index.jsp");
                         out.print("");
                     }
@@ -208,14 +208,12 @@
                                                 <label for="validationDefault02">Anterior Contraseña</label>
                                                 <input type="text" class="form-control" name="passwordn" id="validationDefault02" placeholder="contraseña" required>
                                             </div>
-
-                                            <div class="col-md-4 mb-3">
-                                                <label for="validationDefault02">Identificacion</label>
-                                                <input type="text" class="form-control" name="user" id="validationDefault02" placeholder="Identificador" required>
-                                            </div>
-
-
-
+                                            <!-- 
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="validationDefault02">Identificacion</label>
+                                                    <input type="text" class="form-control" name="user" id="validationDefault02" placeholder="Identificador" required>
+                                                </div>
+                                            -->
                                         </div>
                                         <br>
 
@@ -230,9 +228,9 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-
+                                                        <h3>¿Estas seguro que quieres cambiar tu contraseña?</h3>
                                                         <hr>
-                                                        <p>Cambio de Contraseña Exitoso.</p>
+                                                        <p>De ser cierto, se te enviará un correo de exito.</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -363,9 +361,12 @@
                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                             <div class="card-deck">
                                 <div class="card-deck">
-                                    <% %>
+                                    <% for (int i = 0; i < 10; i++) {
+
+                                        }
+                                    %>
                                     <div class="card">
-                                        <img class="card-img-top" src="Img/habitacion.jpg" alt="Card image cap">
+                                        <img class="card-img-top" src="Img/habitacion0.jpg" alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Card title</h5>
                                             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -377,7 +378,7 @@
                                         </div>
                                     </div>
                                     <div class="card">
-                                        <img class="card-img-top" src="Img/habitacion2.jpg" alt="Card image cap">
+                                        <img class="card-img-top" src="Img/habitacion1.jpg" alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Card title</h5>
                                             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
@@ -389,7 +390,7 @@
                                         </div>
                                     </div>
                                     <div class="card">
-                                        <img class="card-img-top" src="Img/habitacion3.jpg" alt="Card image cap">
+                                        <img class="card-img-top" src="Img/habitacion2.jpg" alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Card title</h5>
                                             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>

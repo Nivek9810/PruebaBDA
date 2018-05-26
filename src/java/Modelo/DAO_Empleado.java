@@ -34,7 +34,6 @@ public class DAO_Empleado {
 
     
     public DAO_Empleado() throws SQLException {
-        this.statement = null;
         this.resultSet = null;
         this.con = new Conexion();
         this.enviarE = new Email();

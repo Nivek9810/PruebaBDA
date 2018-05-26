@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.Correo;
 import Modelo.DAO_Cliente;
 import Modelo.DTO_Cliente;
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class ServletContrasena extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletContrasena</title>");            
+            out.println("<title>Servlet ServletContrasena</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ServletContrasena at " + request.getContextPath() + "</h1>");
@@ -58,33 +59,45 @@ public class ServletContrasena extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-   protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Servlet CrearUS</title>");
+        out.println("</head>");
+        out.println("<body>");
         try {
             DAO_Cliente cambio = new DAO_Cliente();
-            String usu, pass,passn;
-            usu = request.getParameter("user");
+            HttpSession sesion = request.getSession();
+            Correo email = new Correo();
+
+            String usu, pass, passn, mensaje, asunto, correo;
+            usu = (String) sesion.getAttribute("user");
             pass = request.getParameter("password");
-            passn=request.getParameter("passwordn");
-            boolean Usuario = cambio.CambiarContra(usu,pass,passn);
-            response.sendRedirect("index.jsp");
+            passn = request.getParameter("passwordn");
+            correo = (String) sesion.getAttribute("correo");
+            boolean Usuario = cambio.CambiarContra(usu, pass, passn);
+            mensaje = sesion.getAttribute("cliente")+", tu contraseña ha sido actualizada exitosamente. \n"+passn.substring(0, 2)+"****  \n\n\nGracias por ser parte de nosotros.";
+            asunto = "Cambio de contraseña | "+sesion.getAttribute("cliente");            
             
+            if (Usuario) {
+                email.enviarCorreo(correo, mensaje, asunto, null);
+            }
+            response.sendRedirect("index.jsp");
 
         } catch (SQLException ex) {
-            response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CrearUS</title>");
-            out.println("</head>");
-            out.println("<body>");
+
             out.println("<h1>Hay un error en at " + ex.getSQLState() + " y en " + ex.getMessage() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
         }
+        out.println("</body>");
+        out.println("</html>");
         processRequest(request, response);
     }
+
     /**
      * Returns a short description of the servlet.
      *
