@@ -53,6 +53,7 @@ public class ServletReserva extends HttpServlet {
         
         String tipohabitacion = request.getParameter("tipohabitacion");
         int nropersona = Integer.parseInt(request.getParameter("nroper"));
+        String identificador = request.getParameter("identificacion");
         response.sendRedirect("index.jsp");
 
         processRequest(request, response);

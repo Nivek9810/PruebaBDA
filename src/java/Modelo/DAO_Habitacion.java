@@ -67,7 +67,7 @@ public class DAO_Habitacion {
     
     public ArrayList<DTO_Habitacion>listanro() throws SQLException{
         nro_Persona.clear();
-        String consulta="SELECT HABITACION.Nro_Persona FROM HABITACION ";
+        String consulta="SELECT * FROM HABITACION;";
         resultSet = statement.executeQuery(consulta);
         while(resultSet.next()){
          nro_Persona.add(new DTO_Habitacion(resultSet.getInt("Nro_Habitacion"),resultSet.getInt("Id_Tipo"),resultSet.getFloat("Valor_Habitacion"),resultSet.getString("Descripcion"),resultSet.getInt("Nro_Persona")));

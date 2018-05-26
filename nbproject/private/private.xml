@@ -4,8 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Familia%20MV/Documents/Proyecto/PruebaBDA/src/java/Modelo/Conexion.java</file>
+            <file>file:/C:/Users/Familia%20MV/Documents/Proyecto/PruebaBDA/src/java/Controlador/ServletSesionL.java</file>
             <file>file:/C:/Users/Familia%20MV/Documents/Proyecto/PruebaBDA/web/index.jsp</file>
-            <file>file:/C:/Users/Familia%20MV/Documents/Proyecto/PruebaBDA/src/java/Modelo/DTO_Habitacion.java</file>
+            <file>file:/C:/Users/Familia%20MV/Documents/Proyecto/PruebaBDA/src/java/Controlador/ServletReserva.java</file>
         </group>
     </open-files>
 </project-private>
