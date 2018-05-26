@@ -20,7 +20,7 @@ public class Conexion {
     {
         try {
             Class.forName("org.postgresql.Driver").newInstance();
-            String url = "jdbc:postgresql://localhost:5432/hospedajereal";
+            String url = "jdbc:postgresql://localhost:5433/hospedajereal";
             String user = "postgres"; 
             String pass = "123456";
                 db_conn = DriverManager.getConnection(url,user,pass);  

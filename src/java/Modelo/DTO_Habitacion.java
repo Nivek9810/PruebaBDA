@@ -15,7 +15,25 @@ public class DTO_Habitacion {
     private float Valor_Habitacion;
     private String Descripcion;
     private Integer Nro_persona;
+   
 
+    public DTO_Habitacion(Integer Nro_Habitacion, Integer Id_Tipo, float Valor_Habitacion, String Descripcion, Integer Nro_persona) {
+        this.Nro_Habitacion = Nro_Habitacion;
+        this.Id_Tipo = Id_Tipo;
+        this.Valor_Habitacion = Valor_Habitacion;
+        this.Descripcion = Descripcion;
+        this.Nro_persona = Nro_persona;
+    }
+    
+    public DTO_Habitacion() {
+        this.Nro_Habitacion = 0;
+        this.Id_Tipo = 0;
+        this.Valor_Habitacion = 0;
+        this.Descripcion = " ";
+        this.Nro_persona = 0;
+    }
+    
+    
     public Integer getNro_Habitacion() {
         return Nro_Habitacion;
     }

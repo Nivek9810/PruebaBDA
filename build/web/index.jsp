@@ -319,13 +319,22 @@
                                     <button class="btn btn-primary" data-toggle="modal" data-target="#registroModal">Enviar</button>
                                 </div>
                                 <div class="tab-pane fade" id="reserva" role="tabpanel" aria-labelledby="profile-tab">
-                                    <form method="POST" enctype="multipart/form-data">
+                                    <form method="POST" enctype="ServletReserva">
                                         <div class="form-group col-md-6">
-                                            <label for="inputState">Tipo Habitacion</label>
-                                            <select id="inputState" class="form-control">
-                                                <option selected>Habitacion Estandar</option>
-                                                <option>Habitacion Doble</option>
-                                                <option>Habitacion Triple</option>
+                                            
+                                            <label for="tipoh">Tipo Habitacion</label>
+                                            
+                                            <select id="tipoh" class="custom-select" name="tipohabitacion">
+                                                <option selected>Selecciona una habitacion</option>
+                                                <%                                                        DAO_Habitacion obj_h = new DAO_Habitacion();
+                                                        ArrayList<DTO_Tipo_Habitacion> listaTh = obj_h.listatp();
+                                                        for (int ida = 0; ida < listaTh.size(); ida++) {
+                                                %>
+                                                <option value="<% out.print(listaTh.get(ida).getId_Tipo()); %>"><% out.print(listaTh.get(ida).getTipo_h());  %></option>
+                                                    <%                                                        }
+                                                    %>
+                                                  
+                               
                                             </select>
 
                                         </div>
@@ -337,12 +346,11 @@
                                         </div>
                                         <div class="form-group col-md-4">
                                             Numero de Personas
-                                            <select id="inputState" class="form-control">
-                                                <option selected>1 </option>
-                                                <option>2 </option>
-                                                <option>3 </option>
-                                                <option>4 </option>
-                                                <option>5 </option>
+                                            <select id="inputState" class="form-control" name="nropersona">
+                                                <option selected>Selecciona cantidad</option>
+                                                
+                                               
+                                               
                                             </select>
                                         </div>
                                         <br><br>
