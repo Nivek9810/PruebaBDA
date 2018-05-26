@@ -45,29 +45,29 @@ public class DAO_Cliente {
 
     public DTO_Cliente SessionU(String User, String Pass) throws SQLException {
 
-        String query = "SELECT * FROM CLIENTE WHERE id_cliente='" + User + "' AND contrasenac='" + Pass + "';";
+        String query = "SELECT * FROM cliente WHERE id_cliente='" + User + "' AND contrasenac='" + Pass + "';";
         resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
             
-            this.User.setId_Cliente(resultSet.getInt("id_cliente"));
+            this.User.setId_Cliente(resultSet.getString("id_cliente"));
             this.User.setContrasenaC(resultSet.getString("contrasenac"));
            
         }
         return this.User;
     }
 
-    public boolean CambiarContra(String User, String Pass, String Mail, String PassAnt) throws SQLException {
-            String Sql = "SELECT * FROM CLIENTE  WHERE  contrasenac = '" + PassAnt + "' AND id_cliente ='" + Mail + "';";
+    public boolean CambiarContra(String User, String Pass, String PassAnt) throws SQLException {
+            String Sql = "SELECT * FROM cliente WHERE  contrasenac = '" + PassAnt + "' AND id_cliente ='" + User + "';";
         resultSet = statement.executeQuery(Sql);
         Statement statementUPD = conection.createStatement();
         boolean Resp = false;
         while (resultSet.next()) {
-            String Query = "UPDATE CLIENTE SET contrasenac = '" + Pass + "' WHERE id_cliente ='" + User + "';";
+            String Query = "UPDATE cliente SET contrasenac = '" + Pass + "' WHERE id_cliente ='" + User + "';";
             int res = statementUPD.executeUpdate(Query);
-            if (res > 0) {
+            /*if (res > 0) {
                 enviarE.enviarCorreo(Mail, "Se ha modificado correctamente su nueva contraseña: " + Pass.substring(0, 2) + "**** ", "Contraseña nueva", null);
                 Resp = true;
-            }
+            }*/
         }
         return Resp;
     }

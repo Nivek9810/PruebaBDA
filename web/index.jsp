@@ -20,7 +20,9 @@
                     HttpSession sessionStatus = request.getSession();
                     if (sessionStatus.getAttribute("usuario") != null) {
                         out.print(" | " + sessionStatus.getAttribute("usuario"));
-                    } else {
+                    } else if (sessionStatus.getAttribute("cliente") != null) {
+                        out.print(" | " + sessionStatus.getAttribute("cliente"));
+                    }else {
                         //response.sendRedirect("index.jsp");
                         out.print("");
                     }
@@ -32,6 +34,13 @@
                         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
                         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Categoria de habitación</a>
                         <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Locaciones</a>
+                        <%if (session.getAttribute("cliente") != null) {
+                        %>
+                        <form  method="GET" action="Enviar">
+                            <input type="text" name="enviar" value="Si" hidden>
+                            <button type="submit" class="btn btn-outline-info">Salir</button>
+                        </form>
+                        <%} %>
                     </div>
                 </div>
                 <div class="col-9">
@@ -50,21 +59,31 @@
                                 <%if (session.getAttribute("usuario") != null) {%>
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#reserva" role="tab" aria-controls="contact" aria-selected="false">Reserva</a>
-                                   </li>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#servicios" role="tab" aria-controls="contact" aria-selected="false">Servicios</a>
                                 </li>
-                                <%} else {%>
-                                
-                                    <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#login" role="tab" aria-controls="contact" aria-selected="false">Login</a>
-                                        
+                                <%} else if (session.getAttribute("cliente") != null) {
+                                %>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#reserva" role="tab" aria-controls="contact" aria-selected="false">Reserva</a>
                                 </li>
-                                
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#servicios" role="tab" aria-controls="contact" aria-selected="false">Servicios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#cambiocontraseña" role="tab" aria-controls="contact" aria-selected="false">Cambio Contraseña</a>
+                                </li>
+                                <%
+                                } else {%>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#login" role="tab" aria-controls="contact" aria-selected="false">Login</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#registrarse" role="tab" aria-controls="contact" aria-selected="false">Registrarse</a>
                                 </li>
-                                <%}%>
+                                <%}
+                                %>
 
                                 <%} catch (Exception e) {
                                         response.sendRedirect("index.jsp");
@@ -154,20 +173,77 @@
                                     </script>
                                 </div>
                                 <div class="tab-pane fade" id="login" role="tabpanel" aria-labelledby="profile-tab">
-                                                  <h1><i>Bienvenido</i></h1>
+                                    <h1><i>Bienvenido</i></h1>
                                     <form action="ServletSesionL" method="POST">
-                                        <div>
-                                            <img src="Img/user.png" width="200" align="left" /> 
-
+                                        <div class="form-row">
+                                            <div class="form-group col-md-2">
+                                                <img src="Img/user.png" width="150" height="150" align="left" />
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-group col-md-12">
+                                                    <label>User</label> <input type="number" name="user" class="form-control" required  />
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label>Pass</label> <input type="password" name="password" class="form-control" required />
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <label>User</label> <input type="text" name="user" value="usuario" /><br><br>
-                                        <label>Pass</label> <input type="password" name="password" value="contraseña" /><br><br>
-
-                                        <input type="submit" value="Enviar" >
-                                        <br><br>
-
 
                                     </form>
+
+                                </div>
+                                <div class="tab-pane fade" id="cambiocontraseña" role="tabpanel" aria-labelledby="profile-tab">
+
+                                    <form method="POST" action="ServletContrasena">
+
+                                        <div class="form-row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationDefault01">Nueva Contraseña</label>
+                                                <input type="text" class="form-control" name="password" id="validationDefault01" placeholder="Contraseña" required>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationDefault02">Anterior Contraseña</label>
+                                                <input type="text" class="form-control" name="passwordn" id="validationDefault02" placeholder="contraseña" required>
+                                            </div>
+
+                                            <div class="col-md-4 mb-3">
+                                                <label for="validationDefault02">Identificacion</label>
+                                                <input type="text" class="form-control" name="user" id="validationDefault02" placeholder="Identificador" required>
+                                            </div>
+
+
+
+                                        </div>
+                                        <br>
+
+
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Cambio de Contraseña</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <hr>
+                                                        <p>Cambio de Contraseña Exitoso.</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                        <button type="submit" class="btn btn-primary">Aceptar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+
                                 </div>
                                 <div class="tab-pane fade" id="registrarse" role="tabpanel" aria-labelledby="profile-tab">
                                     <form method="POST" action="Enviar">
@@ -220,7 +296,6 @@
                                             </div>
                                         </div>
                                         <br>
-                                        
 
                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
@@ -247,41 +322,37 @@
                                     <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enviar</button>
                                 </div>
                                 <div class="tab-pane fade" id="reserva" role="tabpanel" aria-labelledby="profile-tab">
-                                     <div class="form-group col-md-6">
-                                                <label for="inputState">Tipo Habitacion</label>
-                                                <select id="inputState" class="form-control">
-                                                    <option selected>Habitacion Estandar</option>
-                                                    <option>Habitacion Doble</option>
-                                                    <option>Habitacion Triple</option>
-                                                </select>
+                                    <form method="POST" enctype="multipart/form-data">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputState">Tipo Habitacion</label>
+                                            <select id="inputState" class="form-control">
+                                                <option selected>Habitacion Estandar</option>
+                                                <option>Habitacion Doble</option>
+                                                <option>Habitacion Triple</option>
+                                            </select>
 
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                Fecha de Inicio<input type="date" class="form-control ">
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                Fecha de Salida<input type="date" class="form-control ">
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                Numero de Personas
-                                                <select id="inputState" class="form-control">
-                                                    <option selected>1 </option>
-                                                    <option>2 </option>
-                                                    <option>3 </option>
-                                                    <option>4 </option>
-                                                    <option>5 </option>
-                                                </select>
-                                            </div>
-                                            <br><br>
-                                            <div class="form-group col-md-4">  
-                                                <button type="submit" class="btn btn-primary" >Reservar</button>
-                                            </div>
                                         </div>
-                                    </form>
-                                </div>
-                                    <form  method="GET" action="Enviar">
-                                        <input type="text" name="enviar" value="Si" hidden>
-                                        <input type="submit" class="btn-primary" value="Salir">            
+                                        <div class="form-group col-md-4">
+                                            Fecha de Inicio<input type="date" class="form-control ">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            Fecha de Salida<input type="date" class="form-control ">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            Numero de Personas
+                                            <select id="inputState" class="form-control">
+                                                <option selected>1 </option>
+                                                <option>2 </option>
+                                                <option>3 </option>
+                                                <option>4 </option>
+                                                <option>5 </option>
+                                            </select>
+                                        </div>
+                                        <br><br>
+                                        <div class="form-group col-md-4">  
+                                            <button type="submit" class="btn btn-primary" >Reservar</button>
+                                        </div>
+
                                     </form>
                                 </div>
                                 <div class="tab-pane fade" id="servicios" role="tabpanel" aria-labelledby="profile-tab">

@@ -10,18 +10,36 @@ package Modelo;
  * @author Familia MV
  */
 public class DTO_Cliente {
-    private Integer Id_Cliente ;
+    private String Id_Cliente ;
     private String ContrasenaC ;
     private Integer Id_PerosonaFK ;
     private Integer Nro_Habitacion ;
 
-    public Integer getId_Cliente() {
+    public DTO_Cliente() {
+        this.Id_Cliente = "";
+        this.ContrasenaC = "";
+        this.Id_PerosonaFK = 0;
+        this.Nro_Habitacion = 0;
+    }
+
+    public DTO_Cliente(String Id_Cliente, String ContrasenaC, Integer Id_PerosonaFK, Integer Nro_Habitacion) {
+        this.Id_Cliente = Id_Cliente;
+        this.ContrasenaC = ContrasenaC;
+        this.Id_PerosonaFK = Id_PerosonaFK;
+        this.Nro_Habitacion = Nro_Habitacion;
+    }
+    
+    
+
+    public String getId_Cliente() {
         return Id_Cliente;
     }
 
-    public void setId_Cliente(Integer Id_Cliente) {
+    public void setId_Cliente(String Id_Cliente) {
         this.Id_Cliente = Id_Cliente;
     }
+
+    
 
     public String getContrasenaC() {
         return ContrasenaC;

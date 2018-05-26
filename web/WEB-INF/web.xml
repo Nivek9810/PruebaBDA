@@ -8,6 +8,10 @@
         <servlet-name>ServletSesionL</servlet-name>
         <servlet-class>Controlador.ServletSesionL</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletContrasena</servlet-name>
+        <servlet-class>Controlador.ServletContrasena</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Enviar</servlet-name>
         <url-pattern>/Enviar</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>ServletSesionL</servlet-name>
         <url-pattern>/ServletSesionL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletContrasena</servlet-name>
+        <url-pattern>/ServletContrasena</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

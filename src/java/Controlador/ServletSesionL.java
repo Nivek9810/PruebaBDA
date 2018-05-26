@@ -65,12 +65,13 @@ public class ServletSesionL extends HttpServlet {
             DTO_Cliente Usuario = Login.SessionU(usu, pass);
             
             
-            if (usu.equals(Usuario.getId_Cliente()) && pass.equals(Usuario.getContrasenaC()) && sesion.getAttribute("usuario") == null) {
+            if (usu.equals(Usuario.getId_Cliente()) && pass.equals(Usuario.getContrasenaC()) && sesion.getAttribute("cliente") == null) {
                 //si coincide usuario y password y además no hay sesión iniciada
-                sesion.setAttribute("usuario", usu);                
+                sesion.setAttribute("cliente", Usuario.getId_Cliente());                
                 sesion.setMaxInactiveInterval(60);
                 //redirijo a página con información de login exitoso
-                response.sendRedirect("home.jsp");
+            
+                response.sendRedirect("index.jsp");
             } else {
                 response.sendRedirect("index.jsp");
                 sesion.invalidate();
