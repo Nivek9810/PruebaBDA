@@ -44,11 +44,11 @@ public class DAO_Empleado {
 
     public DTO_Empleado SessionE(String usuario, String Pass) throws SQLException {
 
-        String query = "SELECT * FROM empleado WHERE id_empleado=" + usuario + " AND contrasena='" + Pass + "';";
+        String query = "SELECT * FROM empleado WHERE id_empleado='" + usuario + "' AND contrasena='" + Pass + "';";
         resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
 
-            this.User.setId_Empleado(resultSet.getInt("id_empleado"));
+            this.User.setId_Empleado(resultSet.getString("id_empleado"));
             this.User.setContrasena(resultSet.getString("contrasena"));
             this.User.setId_PersonaFK(resultSet.getString("id_persona"));
             this.User.setCargo(resultSet.getInt("id_cargo"));

@@ -46,7 +46,7 @@ public class DAO_Habitacion {
     }
     
     public ArrayList<DTO_Habitacion> listaHab(){
-        
+        String consulta = ""; 
         return lst_Nacionalidad;
     } 
 

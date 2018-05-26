@@ -83,8 +83,8 @@ public class ServletSesionL extends HttpServlet {
                 //redirijo a página con información de login exitoso
                 response.sendRedirect("index.jsp");
 
-            } else if (Integer.parseInt(usu) == objEmp.getId_Empleado() && pass.equals(objEmp.getContrasena()) && sesion.getAttribute("cliente") == null) {
-                sesion.setAttribute("cliente", objPerE.getNombre());
+            } else if (usu.equals(objEmp.getId_Empleado()) && pass.equals(objEmp.getContrasena()) && sesion.getAttribute("usuario") == null) {
+                sesion.setAttribute("usuario", objPerE.getNombre());
                 sesion.setMaxInactiveInterval(60);
                 response.sendRedirect("index.jsp");
 

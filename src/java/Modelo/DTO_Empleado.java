@@ -11,19 +11,19 @@ package Modelo;
  */
 public class DTO_Empleado {
     
-    private Integer Id_Empleado ;
+    private String Id_Empleado ;
     private Integer Cargo ;
     private String Contrasena ;
     private String Id_PersonaFK ;
 
     public DTO_Empleado() {
-        this.Id_Empleado = 0;
+        this.Id_Empleado = "";
         this.Cargo = 0;
         this.Contrasena = "";
         this.Id_PersonaFK = "";
     }
 
-    public DTO_Empleado(Integer Id_Empleado, Integer Cargo, String Contrasena, String Id_PersonaFK) {
+    public DTO_Empleado(String Id_Empleado, Integer Cargo, String Contrasena, String Id_PersonaFK) {
         this.Id_Empleado = Id_Empleado;
         this.Cargo = Cargo;
         this.Contrasena = Contrasena;
@@ -32,11 +32,11 @@ public class DTO_Empleado {
     
     
 
-    public Integer getId_Empleado() {
+    public String getId_Empleado() {
         return Id_Empleado;
     }
 
-    public void setId_Empleado(Integer Id_Empleado) {
+    public void setId_Empleado(String Id_Empleado) {
         this.Id_Empleado = Id_Empleado;
     }
 

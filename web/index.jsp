@@ -108,38 +108,38 @@
                                                     <img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=777&amp;fg=555&amp;text=First slide" alt="First slide [800x400]" src="Img/slideshow.jpg" data-holder-rendered="true">
                                                     <div class="carousel-caption d-none d-md-block">
                                                         <h5>Cartagena</h5>
-                                                        <p>Un lugar maravilloso.</p>
+                                                        <p>Sin duda algúna, un lugar maravilloso.</p>
                                                     </div>
                                                 </div>
                                                 <div class="carousel-item">
                                                     <img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=666&amp;fg=444&amp;text=Second slide" alt="Second slide [800x400]" src="Img/slideshow1.jpg" data-holder-rendered="true">
                                                     <div class="carousel-caption d-none d-md-block">
-                                                        <h5>Second slide label</h5>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                        <h5>Bahamas</h5>
+                                                        <p>Es un lugar paradisiaco, que no te puedes perder.</p>
                                                     </div>
                                                 </div>
                                                 <div class="carousel-item">
                                                     <img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=666&amp;fg=444&amp;text=Four slide" alt="Second slide [800x400]" src="Img/slideshow2.jpg" data-holder-rendered="true">
                                                     <div class="carousel-caption d-none d-md-block">
-                                                        <h5>Second slide label</h5>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                        <h5>Cancún</h5>
+                                                        <p>Si quieres descansar, ésta es tu mejor opción.</p>
                                                     </div>
                                                 </div>
                                                 <div class="carousel-item">
                                                     <img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=555&amp;fg=333&amp;text=Third slide" alt="Third slide [800x400]" src="Img/slideshow3.jpg" data-holder-rendered="true">
                                                     <div class="carousel-caption d-none d-md-block">
-                                                        <h5>Third slide label</h5>
-                                                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                                        <h5>Miami</h5>
+                                                        <p>Te aseguro que tus vacaciones serán inolvidables.</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                <span class="sr-only">Previous</span>
+                                                <span class="sr-only">Anterior</span>
                                             </a>
                                             <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
                                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                <span class="sr-only">Next</span>
+                                                <span class="sr-only">Siguiente</span>
                                             </a>
                                         </div>
                                     </div>
@@ -362,7 +362,7 @@
                             <div class="card-deck">
                                 <div class="card-deck">
                                     <% for (int i = 0; i < 10; i++) {
-
+                                        
                                         }
                                     %>
                                     <div class="card">
