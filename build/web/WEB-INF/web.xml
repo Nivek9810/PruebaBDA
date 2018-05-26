@@ -13,8 +13,13 @@
         <servlet-class>Controlador.ServletContrasena</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>ReservarCategoria</servlet-name>
         <servlet-class>Controlador.ReservarCategoria</servlet-class>
+=======
+        <servlet-name>ServletReserva</servlet-name>
+        <servlet-class>Controlador.ServletReserva</servlet-class>
+>>>>>>> fa4ddd16ed3e364c75fa59925c6bff2e529d7b32
     </servlet>
     <servlet-mapping>
         <servlet-name>Enviar</servlet-name>
@@ -29,8 +34,13 @@
         <url-pattern>/ServletContrasena</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>ReservarCategoria</servlet-name>
         <url-pattern>/ReservarCategoria</url-pattern>
+=======
+        <servlet-name>ServletReserva</servlet-name>
+        <url-pattern>/ServletReserva</url-pattern>
+>>>>>>> fa4ddd16ed3e364c75fa59925c6bff2e529d7b32
     </servlet-mapping>
     <session-config>
         <session-timeout>

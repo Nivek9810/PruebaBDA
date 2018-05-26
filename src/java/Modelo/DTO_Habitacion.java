@@ -15,6 +15,7 @@ public class DTO_Habitacion {
     private float Valor_Habitacion;
     private String Descripcion;
     private Integer Nro_persona;
+   
 
     public DTO_Habitacion() {
         this.Nro_Habitacion = 0;
@@ -32,7 +33,6 @@ public class DTO_Habitacion {
         this.Nro_persona = Nro_persona;
     }
 
-    
     public Integer getNro_Habitacion() {
         return Nro_Habitacion;
     }

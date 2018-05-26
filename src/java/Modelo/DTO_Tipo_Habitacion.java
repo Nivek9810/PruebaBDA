@@ -39,5 +39,4 @@ public class DTO_Tipo_Habitacion {
     public void setTipo_h(String tipo_h) {
         this.tipo_h = tipo_h;
     }
-
 }

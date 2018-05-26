@@ -5,8 +5,12 @@
         <group>
             <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Controlador/ReservarCategoria.java</file>
             <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/DAO_Habitacion.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Controlador/Enviar.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/DTO_Tipo_Habitacion.java</file>
             <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/web/index.jsp</file>
+            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/DTO_Habitacion.java</file>
             <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/DTO_Habitacion_V.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/Conexion.java</file>
         </group>
     </open-files>
 </project-private>
