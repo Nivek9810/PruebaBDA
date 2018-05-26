@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/DAO_Cliente.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Controlador/ReservarCategoria.java</file>
             <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/DAO_Habitacion.java</file>
             <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/web/index.jsp</file>
-            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Controlador/ServletSesionL.java</file>
-            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/DAO_Empleado.java</file>
-            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Controlador/ServletContrasena.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/DTO_Habitacion_V.java</file>
         </group>
     </open-files>
 </project-private>

@@ -34,7 +34,15 @@
                         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
                         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Categoria de habitación</a>
                         <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Locaciones</a>
-                        <%if (session.getAttribute("cliente") != null) {
+                        <%if (session.getAttribute("usuario") != null) {%>
+                        <a class="nav-link" id="v-pills-reserva-tab" data-toggle="pill" href="#v-pills-reserva" role="tab" aria-controls="v-pills-reserva" aria-selected="false">Reservas</a>
+                        <a class="nav-link" id="v-pills-factura-tab" data-toggle="pill" href="#v-pills-factura" role="tab" aria-controls="v-pills-factura" aria-selected="false">Factura</a>
+                        <a class="nav-link" id="v-pills-usuario-tab" data-toggle="pill" href="#v-pills-usuario" role="tab" aria-controls="v-pills-usuario" aria-selected="false">Usuario</a>
+                        <form  method="GET" action="Enviar">
+                            <input type="text" name="enviar" value="Si" hidden>
+                            <button type="submit" class="btn btn-outline-info">Salir</button>
+                        </form>
+                        <%} else if ((session.getAttribute("cliente") != null)) {
                         %>
                         <form  method="GET" action="Enviar">
                             <input type="text" name="enviar" value="Si" hidden>
@@ -361,53 +369,90 @@
                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                             <div class="card-deck">
                                 <div class="card-deck">
-                                    <% for (int i = 0; i < 10; i++) {
-                                        
-                                        }
+                                    <%
+                                        DAO_Habitacion objH = new DAO_Habitacion();
+                                        ArrayList<DTO_Tipo_Habitacion> ListaTH = objH.listatp();
+
+                                        for (int i = 0; i < ListaTH.size(); i++) {
                                     %>
                                     <div class="card">
-                                        <img class="card-img-top" src="Img/habitacion0.jpg" alt="Card image cap">
+                                        <img class="card-img-top" src="Img/habitacion<%out.print(i);%>.jpg" alt="Card image cap">
                                         <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-
+                                            <h5 class="card-title"><% out.print(ListaTH.get(i).getTipo_h()); %></h5>
+                                            <p class="card-text">No te pierdas la oportunidad de vivir una experiencia única.</p>
                                         </div>
                                         <div class="card-footer">
-                                            <a href="#" class="btn btn-outline-primary">Reservar</a>
+                                                <input type="submit" data-toggle="modal" data-target="#resCatModal" data-whatever="<% out.print(ListaTH.get(i).getId_tipo()); %>" class="btn btn-outline-primary" value="Reservar">
                                             <!--<small class="text-muted">Last updated 3 mins ago</small>-->
                                         </div>
-                                    </div>
-                                    <div class="card">
-                                        <img class="card-img-top" src="Img/habitacion1.jpg" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                                        <div class="modal fade bd-example-modal-lg" id="resCatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Reserva por categoría</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h3>Estas son tus opciones</h3>
+                                                        <hr>
+                                                        <table class="table">
+                                                            <thead class="thead-dark">
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Tipo</th>
+                                                                    <th scope="col">Descripcion</th>
+                                                                    <th scope="col">Valor</th>
+                                                                    <th scope="col">Capacidad</th>
+                                                                    <th scope="col">Elección</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <%
+                                                                    //ArrayList<DTO_Habitacion_V> ListaHV = objH.listaHab(Integer.parseInt(request.getParameter("id_tipoH")));
+                                                                    //for (int j = 0; j < ListaHV.size(); j++) {
 
-                                        </div>
-                                        <div class="card-footer">
-                                            <a href="#" class="btn btn-outline-primary">Reservar</a>
-                                            <!--<small class="text-muted">Last updated 3 mins ago</small>-->
+                                                                %>
+                                                                <tr>
+                                                                    <th scope="row"><%//out.print(request.getParameter("id_tipoH"));//out.print(ListaHV.get(j).getNro_Habitacion());%></th>
+                                                                    <td><%//out.print(ListaHV.get(j).getTipo());%></td>
+                                                                    <td><%//out.print(ListaHV.get(j).getDescripcion());%></td>
+                                                                    <td><%//out.print(ListaHV.get(j).getValor_Habitacion());%></td>
+                                                                    <td><%//out.print(ListaHV.get(j).getNro_persona());%></td>
+                                                                    <td>
+                                                                        <form action="ReservarCategoria" method="POST">
+                                                                            <input type="text" value="<% out.print(ListaTH.get(i).getId_tipo());%>" hidden name="id_tipoH">
+                                                                            <input type="submit" class="btn btn-outline-primary" value="Reservar">
+                                                                        </form>
+                                                                    </td>
+                                                                </tr>
+                                                                <%//}
+                                                                %>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                        <button type="submit" class="btn btn-primary">Aceptar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="card">
-                                        <img class="card-img-top" src="Img/habitacion2.jpg" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-
-                                        </div>
-                                        <div class="card-footer">
-                                            <a href="#" class="btn btn-outline-primary">Reservar</a>
-                                            <!--<small class="text-muted">Last updated 3 mins ago</small>-->
-                                        </div>
-                                    </div>
+                                    <%}
+                                    %>
+                                    <!-- 
+                                           
+                                    -->
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-
-                        </div>
                         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+                        <div class="tab-pane fade" id="v-pills-reserva" role="tabpanel" aria-labelledby="v-pills-reserva-tab">Reserva</div>
+                        <div class="tab-pane fade" id="v-pills-factura" role="tabpanel" aria-labelledby="v-pills-factura-tab">Factura</div>
+                        <div class="tab-pane fade" id="v-pills-usuario" role="tabpanel" aria-labelledby="v-pills-usuario-tab">Usuario</div>
+
 
                     </div>
                 </div>

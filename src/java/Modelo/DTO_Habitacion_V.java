@@ -5,34 +5,39 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Familia MV
  */
-public class DTO_Habitacion {
+public class DTO_Habitacion_V {
+
     private Integer Nro_Habitacion;
-    private Integer Id_Tipo;
-    private float Valor_Habitacion;
+    private String Tipo;
+    private Float Valor_Habitacion;
     private String Descripcion;
     private Integer Nro_persona;
+    private Integer id_tipo;
 
-    public DTO_Habitacion() {
+    public DTO_Habitacion_V() {
         this.Nro_Habitacion = 0;
-        this.Id_Tipo = 0;
-        this.Valor_Habitacion = 0;
+        this.Tipo = "";
+        this.Valor_Habitacion = null;
         this.Descripcion = "";
         this.Nro_persona = 0;
+        this.id_tipo = 0;
     }
 
-    public DTO_Habitacion(Integer Nro_Habitacion, Integer Id_Tipo, float Valor_Habitacion, String Descripcion, Integer Nro_persona) {
+    public DTO_Habitacion_V(Integer Nro_Habitacion, String Tipo, Float Valor_Habitacion, String Descripcion, Integer Nro_persona, Integer id_tipo) {
         this.Nro_Habitacion = Nro_Habitacion;
-        this.Id_Tipo = Id_Tipo;
+        this.Tipo = Tipo;
         this.Valor_Habitacion = Valor_Habitacion;
         this.Descripcion = Descripcion;
         this.Nro_persona = Nro_persona;
+        this.id_tipo = id_tipo;
     }
 
-    
     public Integer getNro_Habitacion() {
         return Nro_Habitacion;
     }
@@ -41,21 +46,19 @@ public class DTO_Habitacion {
         this.Nro_Habitacion = Nro_Habitacion;
     }
 
-    public Integer getId_Tipo() {
-        return Id_Tipo;
+    public String getTipo() {
+        return Tipo;
     }
 
-    public void setId_Tipo(Integer Id_Tipo) {
-        this.Id_Tipo = Id_Tipo;
+    public void setTipo(String Tipo) {
+        this.Tipo = Tipo;
     }
 
-    
-
-    public float getValor_Habitacion() {
+    public Float getValor_Habitacion() {
         return Valor_Habitacion;
     }
 
-    public void setValor_Habitacion(float Valor_Habitacion) {
+    public void setValor_Habitacion(Float Valor_Habitacion) {
         this.Valor_Habitacion = Valor_Habitacion;
     }
 
@@ -74,6 +77,15 @@ public class DTO_Habitacion {
     public void setNro_persona(Integer Nro_persona) {
         this.Nro_persona = Nro_persona;
     }
+
+    public Integer getId_tipo() {
+        return id_tipo;
+    }
+
+    public void setId_tipo(Integer id_tipo) {
+        this.id_tipo = id_tipo;
+    }
+
     
-    
+
 }
