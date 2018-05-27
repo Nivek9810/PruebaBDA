@@ -266,7 +266,8 @@
                                                 <label for="select01">Nacionalidad</label>
                                                 <select id="select01" class="custom-select" name="nacionalidad">
                                                     <option selected>Selecciona una nacionalidad</option>
-                                                    <%                                                        DAO_Persona obj_Per = new DAO_Persona();
+                                                    <%                                                        
+                                                        DAO_Persona obj_Per = new DAO_Persona();
                                                         ArrayList<DTO_Nacionalidad> lista = obj_Per.listarNacionalidad();
                                                         for (int idx = 0; idx < lista.size(); idx++) {
                                                     %>
@@ -327,14 +328,15 @@
                                     <button class="btn btn-primary" data-toggle="modal" data-target="#registroModal">Enviar</button>
                                 </div>
                                 <div class="tab-pane fade" id="reserva" role="tabpanel" aria-labelledby="profile-tab">
-                                    <form method="POST" enctype="ServletReserva">
+                                    <form method="POST" action="ServletReserva">
                                         <div class="form-group col-md-6">
 
                                             <label for="tipoh">Tipo Habitacion</label>
 
                                             <select id="tipoh" class="custom-select" name="tipohabitacion">
                                                 <option selected>Selecciona una habitacion</option>
-                                                <%                                                        DAO_Habitacion obj_h = new DAO_Habitacion();
+                                                <%
+                                                    DAO_Habitacion obj_h = new DAO_Habitacion();
                                                     ArrayList<DTO_Tipo_Habitacion> listaTh = obj_h.listatp();
                                                     for (int ida = 0; ida < listaTh.size(); ida++) {
                                                 %>
@@ -347,10 +349,10 @@
 
                                         </div>
                                         <div class="form-group col-md-4">
-                                            Fecha de Inicio<input type="date" class="form-control ">
+                                            Fecha de Inicio<input type="date" name="Fecha_in" class="form-control ">
                                         </div>
                                         <div class="form-group col-md-4">
-                                            Fecha de Salida<input type="date" class="form-control ">
+                                            Fecha de Salida<input type="date" name="Fecha_sal" class="form-control ">
                                         </div>
                                         <div class="form-group col-md-4">
                                             Numero de Personas
@@ -378,7 +380,79 @@
                                     </form>
                                 </div>
                                 <div class="tab-pane fade" id="servicios" role="tabpanel" aria-labelledby="profile-tab">
-                                    Ser
+                                    <form action="ServletServicios" method="POST">
+
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="list-group" id="list-tab" role="tablist">
+                                                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="Servicio de Bebidas">Servicio de Bebidas</a>
+                                                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="Servicio de Comida">Servicio de Comida</a>
+                                                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="Servicio de Aseo">Servicio de Aseo</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="tab-content" id="nav-tabContent">
+                                                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+
+                                                        <div class="form-group">
+                                                            <select class="custom-select" required>
+                                                                <option value="">Selecione Servicio</option>
+                                                                <option value=""></option>
+                                                                <option value=""></option>
+                                                                <option value=""></option>
+                                                            </select>
+                                                            <label>Digite cantidad</label>
+                                                            <input class="form-control" type="text" placeholder="" name="bebida">
+                                                            <div class="invalid-feedback">Seleccione Un Servicio</div>
+                                                            <br>
+                                                            <input class="btn btn-outline-primary" type="submit" value="Enviar">
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+
+                                                        <div class="form-group">
+                                                            <select class="custom-select" required>
+                                                                <option value="">Selecione Servicio</option>
+                                                                <option value="1"></option>
+                                                                <option value="2"></option>
+                                                                <option value="3"></option>
+                                                            </select>
+                                                            <label>Digite cantidad</label>
+                                                            <input class="form-control" type="text" placeholder="" name="comida">
+                                                            <div class="invalid-feedback">Example invalid custom select feedback</div>
+                                                            <br>
+                                                            <input class="btn btn-outline-primary" type="submit" value="Enviar">
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+
+                                                        <div class="form-group">
+                                                            <select class="custom-select" required>
+                                                                <option value="">Selecione Servicio</option>
+                                                                <option value=""></option>
+                                                                <option value=""></option>
+                                                                <option value=""></option>
+                                                            </select>
+                                                            <label>Digite cantidad</label>
+                                                            <input class="form-control" type="text" placeholder="" name="aseo">
+
+                                                            <br>
+                                                            <input class="btn btn-outline-primary" type="submit" value="Enviar">
+                                                            <div class="invalid-feedback">Example invalid custom select feedback</div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>  
                                 </div>
 
                             </div>
@@ -399,7 +473,7 @@
                                             <p class="card-text">No te pierdas la oportunidad de vivir una experiencia única.</p>
                                         </div>
                                         <div class="card-footer">
-                                                <input type="submit" data-toggle="modal" data-target="#resCatModal" data-whatever="<% out.print(ListaTH.get(i).getId_tipo()); %>" class="btn btn-outline-primary" value="Reservar">
+                                            <input type="submit" data-toggle="modal" data-target="#resCatModal" data-whatever="<% out.print(ListaTH.get(i).getId_tipo()); %>" class="btn btn-outline-primary" value="Reservar">
                                             <!--<small class="text-muted">Last updated 3 mins ago</small>-->
                                         </div>
                                         <div class="modal fade bd-example-modal-lg" id="resCatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -503,3 +577,4 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     </body>
 </html>
+

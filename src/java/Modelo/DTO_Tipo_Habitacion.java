@@ -13,7 +13,7 @@ public class DTO_Tipo_Habitacion {
 
     private Integer id_tipo;
     private String tipo_h;
-
+    
     public DTO_Tipo_Habitacion(Integer id_tipo, String tipo_h) {
         this.id_tipo = id_tipo;
         this.tipo_h = tipo_h;
@@ -39,4 +39,5 @@ public class DTO_Tipo_Habitacion {
     public void setTipo_h(String tipo_h) {
         this.tipo_h = tipo_h;
     }
+
 }
