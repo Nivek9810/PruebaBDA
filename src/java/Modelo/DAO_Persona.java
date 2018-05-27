@@ -26,9 +26,10 @@ public class DAO_Persona {
     private ResultSet resultSet;
     private Connection conection;
 
-    public DAO_Persona(DTO_Persona obj_Persona, ArrayList<DTO_Nacionalidad> lst_Nacionalidad, Statement statement, Conexion con, ResultSet resultSet, Connection conection) {
+    public DAO_Persona(DTO_Persona obj_Persona, ArrayList<DTO_Nacionalidad> lst_Nacionalidad, ArrayList<DTO_Tipo_Doc> lst_TipoDoc, Statement statement, Conexion con, ResultSet resultSet, Connection conection) {
         this.obj_Persona = obj_Persona;
         this.lst_Nacionalidad = lst_Nacionalidad;
+        this.lst_TipoDoc = lst_TipoDoc;
         this.statement = statement;
         this.con = con;
         this.resultSet = resultSet;

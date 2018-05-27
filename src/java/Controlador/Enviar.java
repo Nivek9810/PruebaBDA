@@ -104,7 +104,7 @@ public class Enviar extends HttpServlet {
                 out.println("<script type='text/javascript'> alert('Lo sentimos el correo ya se encuentra registrado!'); "
                         + "window.location.href='index.jsp';</script>");
             } else {
-                session.setAttribute("usuario", objPer.getNombre());
+                session.setAttribute("usuarioN", objPer.getNombre());
                 session.setAttribute("correo", objPer.getCorreo());
                 session.setAttribute("documento", objPer.getId_persona());
                 Mensaje = "Bienvenido " + objPer.getNombre() + ", para nosotros es un gusto saber que eres parte de nosotros. "

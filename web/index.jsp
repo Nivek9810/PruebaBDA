@@ -22,6 +22,8 @@
                         out.print(" | " + sessionStatus.getAttribute("usuario"));
                     } else if (sessionStatus.getAttribute("cliente") != null) {
                         out.print(" | " + sessionStatus.getAttribute("cliente"));
+                    } else if (sessionStatus.getAttribute("usuarioN") != null) {
+                        out.print(" | " + sessionStatus.getAttribute("usuarioN"));
                     } else {
                         //response.sendRedirect("index.jsp");
                         out.print("");
@@ -31,19 +33,25 @@
             <div class="row">
                 <div class="col-3">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
                         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+                        <% if (session.getAttribute("usuario") == null && session.getAttribute("cliente") == null) {%>
                         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Categoria de habitación</a>
                         <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Locaciones</a>
-                        <%if (session.getAttribute("usuario") != null) {%>
+
+                        <% } else if (session.getAttribute("usuario") != null) {%>
                         <a class="nav-link" id="v-pills-reserva-tab" data-toggle="pill" href="#v-pills-reserva" role="tab" aria-controls="v-pills-reserva" aria-selected="false">Reservas</a>
                         <a class="nav-link" id="v-pills-factura-tab" data-toggle="pill" href="#v-pills-factura" role="tab" aria-controls="v-pills-factura" aria-selected="false">Factura</a>
                         <a class="nav-link" id="v-pills-usuario-tab" data-toggle="pill" href="#v-pills-usuario" role="tab" aria-controls="v-pills-usuario" aria-selected="false">Usuario</a>
+                        <br>
                         <form  method="GET" action="Enviar">
                             <input type="text" name="enviar" value="Si" hidden>
                             <button type="submit" class="btn btn-outline-info">Salir</button>
                         </form>
                         <%} else if ((session.getAttribute("cliente") != null)) {
                         %>
+                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Categoria de habitación</a>
+                        <br>
                         <form  method="GET" action="Enviar">
                             <input type="text" name="enviar" value="Si" hidden>
                             <button type="submit" class="btn btn-outline-info">Salir</button>
@@ -64,13 +72,12 @@
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contactenos</a>
                                 </li>
 
-                                <%if (session.getAttribute("usuario") != null) {%>
+                                <%if (session.getAttribute("usuarioN") != null) {%>
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#reserva" role="tab" aria-controls="contact" aria-selected="false">Reserva</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#servicios" role="tab" aria-controls="contact" aria-selected="false">Servicios</a>
-                                </li>
+                                <%} else if (session.getAttribute("usuario") != null) {
+                                %>
                                 <%} else if (session.getAttribute("cliente") != null) {
                                 %>
                                 <li class="nav-item">
@@ -93,11 +100,7 @@
                                 <%}
                                 %>
 
-                                <%} catch (Exception e) {
-                                        response.sendRedirect("index.jsp");
-                                    }
 
-                                %>
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <br>
@@ -266,8 +269,7 @@
                                                 <label for="select01">Nacionalidad</label>
                                                 <select id="select01" class="custom-select" name="nacionalidad">
                                                     <option selected>Selecciona una nacionalidad</option>
-                                                    <%                                                        
-                                                        DAO_Persona obj_Per = new DAO_Persona();
+                                                    <%                                                        DAO_Persona obj_Per = new DAO_Persona();
                                                         ArrayList<DTO_Nacionalidad> lista = obj_Per.listarNacionalidad();
                                                         for (int idx = 0; idx < lista.size(); idx++) {
                                                     %>
@@ -540,9 +542,124 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-                        <div class="tab-pane fade" id="v-pills-reserva" role="tabpanel" aria-labelledby="v-pills-reserva-tab">Reserva</div>
-                        <div class="tab-pane fade" id="v-pills-factura" role="tabpanel" aria-labelledby="v-pills-factura-tab">Factura</div>
-                        <div class="tab-pane fade" id="v-pills-usuario" role="tabpanel" aria-labelledby="v-pills-usuario-tab">Usuario</div>
+                        <div class="tab-pane fade" id="v-pills-reserva" role="tabpanel" aria-labelledby="v-pills-reserva-tab">
+                            <!-- Reserva: Tabla : SELECT * FROM habitacion WHERE nro_habitacion not in (SELECT nro_habitacion FROM reserva_habitacion WHERE (current_date) BETWEEN fecha_llegada AND fecha_salida);-->
+
+                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="pills-activas-tab" data-toggle="pill" href="#pills-activas" role="tab" aria-controls="pills-activas" aria-selected="true">Activas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-inactivas-tab" data-toggle="pill" href="#pills-inactivas" role="tab" aria-controls="pills-inactivas" aria-selected="false">Inactivas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-proximas-tab" data-toggle="pill" href="#pills-proximas" role="tab" aria-controls="pills-proximas" aria-selected="false">Proximas</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-activas" role="tabpanel" aria-labelledby="pills-activas-tab">
+
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Valor</th>
+                                                <th scope="col">Descripción</th>
+                                                <th scope="col"># Personas</th>
+                                                <th scope="col">Asignar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%
+                                                DAO_Reserva objRes = new DAO_Reserva();
+                                                String consultaAc = "SELECT * FROM habitacion WHERE nro_habitacion NOT IN (SELECT nro_habitacion FROM reserva_habitacion WHERE (current_date) BETWEEN fecha_llegada AND fecha_salida);";
+                                                ArrayList<DTO_Habitacion> lstHab = objRes.listarReserva(consultaAc);
+                                                for (int i = 0; i < lstHab.size(); i++) {
+                                            %>
+                                            <tr>
+                                                <th scope="row"><%out.print(lstHab.get(i).getNro_Habitacion());%></th>
+                                                <td><%out.print(lstHab.get(i).getValor_Habitacion());%></td>
+                                                <td><%out.print(lstHab.get(i).getDescripcion());%></td>
+                                                <td><%out.print(lstHab.get(i).getNro_persona());%></td>
+                                                <td>
+                                                    <form action="" method="POST">
+                                                        <input type="text" value="<% out.print(lstHab.get(i).getNro_Habitacion());%>" hidden name="id_nroH">
+                                                        <input type="submit" class="btn btn-outline-primary" value="Asignar">
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            <%}%>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="tab-pane fade" id="pills-inactivas" role="tabpanel" aria-labelledby="pills-inactivas-tab">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Valor</th>
+                                                <th scope="col">Descripción</th>
+                                                <th scope="col"># Personas</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%
+
+                                                String consultaIn = "SELECT * FROM habitacion WHERE nro_habitacion IN (SELECT nro_habitacion FROM reserva_habitacion WHERE (current_date) BETWEEN fecha_llegada AND fecha_salida);";
+                                                ArrayList<DTO_Habitacion> lstHabIn = objRes.listarReserva(consultaIn);
+                                                for (int j = 0; j < lstHabIn.size(); j++) {
+                                            %>
+                                            <tr>
+                                                <th scope="row"><%out.print(lstHabIn.get(j).getNro_Habitacion());%></th>
+                                                <td><%out.print(lstHabIn.get(j).getValor_Habitacion());%></td>
+                                                <td><%out.print(lstHabIn.get(j).getDescripcion());%></td>
+                                                <td><%out.print(lstHabIn.get(j).getNro_persona());%></td>
+                                            </tr>
+                                            <%}%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="pills-proximas" role="tabpanel" aria-labelledby="pills-proximas-tab">
+
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Valor</th>
+                                                <th scope="col">Descripción</th>
+                                                <th scope="col"># Personas</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%
+
+                                                String consultaProx = "SELECT * FROM habitacion AS H INNER JOIN reserva_habitacion AS RH ON H.nro_habitacion = RH.nro_habitacion WHERE (current_date) > fecha_llegada OR fecha_salida IS NOT NULL;";
+                                                ArrayList<DTO_Habitacion> lstHabPx = objRes.listarReserva(consultaProx);
+                                                for (int j = 0; j < lstHabPx.size(); j++) {
+                                            %>
+                                            <tr>
+                                                <th scope="row"><%out.print(lstHabPx.get(j).getNro_Habitacion());%></th>
+                                                <td><%out.print(lstHabPx.get(j).getValor_Habitacion());%></td>
+                                                <td><%out.print(lstHabPx.get(j).getDescripcion());%></td>
+                                                <td><%out.print(lstHabPx.get(j).getNro_persona());%></td>
+                                            </tr>
+                                            <%}%>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-factura" role="tabpanel" aria-labelledby="v-pills-factura-tab">
+                            <!-- Factura: Generar, digitar id_reserva -->
+
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-usuario" role="tabpanel" aria-labelledby="v-pills-usuario-tab">
+                            <!-- Usuario: Administración de usuarios digitar cedula de usuario.-->
+
+                        </div>
 
 
                     </div>
@@ -566,7 +683,11 @@
                     </blockquote>
                 </div>
             </div>
+            <%} catch (Exception e) {
+                    response.sendRedirect("index.jsp");
+                }
 
+            %>
         </div>
 
         <!-- Optional JavaScript -->
