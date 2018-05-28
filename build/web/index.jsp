@@ -35,7 +35,7 @@
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
                         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-                        <% if (session.getAttribute("usuario") == null && session.getAttribute("cliente") == null) {%>
+                        <% if (session.getAttribute("usuario") == null && session.getAttribute("cliente") == null && session.getAttribute("usuarioN") == null) {%>
                         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Categoria de habitación</a>
                         <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Locaciones</a>
 
@@ -56,7 +56,14 @@
                             <input type="text" name="enviar" value="Si" hidden>
                             <button type="submit" class="btn btn-outline-info">Salir</button>
                         </form>
-                        <%} %>
+                        <%} else if (session.getAttribute("usuarioN") != null) { %>
+                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Categoria de habitación</a>
+                        <br>
+                        <form  method="GET" action="Enviar">
+                            <input type="text" name="enviar" value="Si" hidden>
+                            <button type="submit" class="btn btn-outline-info">Salir</button>
+                        </form>
+                        <%}%>
                     </div>
                 </div>
                 <div class="col-9">
@@ -72,11 +79,11 @@
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contactenos</a>
                                 </li>
 
-                                <%if (session.getAttribute("usuarioN") != null) {%>
+                                
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#reserva" role="tab" aria-controls="contact" aria-selected="false">Reserva</a>
                                 </li>
-                                <%} else if (session.getAttribute("usuario") != null) {
+                                <%if (session.getAttribute("usuario") != null) {
                                 %>
                                 <%} else if (session.getAttribute("cliente") != null) {
                                 %>
@@ -191,12 +198,19 @@
                                                 <img src="Img/user.png" width="150" height="150" align="left" />
                                             </div>
                                             <div class="form-group">
-                                                <div class="form-group col-md-12">
-                                                    <label>User</label> <input type="number" name="user" class="form-control" required  />
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="">User</span>
+                                                    </div>
+                                                    <input type="number" name="user" class="form-control" required  />
                                                 </div>
-                                                <div class="form-group col-md-12">
-                                                    <label>Pass</label> <input type="password" name="password" class="form-control" required />
+                                                <br>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="">Pass</span>
+                                                    </div><input type="password" name="password" class="form-control" required />
                                                 </div>
+                                                <br>
                                                 <div class="form-group col-md-4">
                                                     <button type="submit" class="btn btn-primary">Enviar</button>
                                                 </div>
@@ -332,49 +346,70 @@
                                 <div class="tab-pane fade" id="reserva" role="tabpanel" aria-labelledby="profile-tab">
                                     <form method="POST" action="ServletReserva">
                                         <div class="form-group col-md-6">
-
-                                            <label for="tipoh">Tipo Habitacion</label>
-
-                                            <select id="tipoh" class="custom-select" name="tipohabitacion">
-                                                <option selected>Selecciona una habitacion</option>
-                                                <%
-                                                    DAO_Habitacion obj_h = new DAO_Habitacion();
-                                                    ArrayList<DTO_Tipo_Habitacion> listaTh = obj_h.listatp();
-                                                    for (int ida = 0; ida < listaTh.size(); ida++) {
-                                                %>
-                                                <option value="<% out.print(listaTh.get(ida).getId_tipo()); %>"><% out.print(listaTh.get(ida).getTipo_h());  %></option>
-                                                <%                                                        }
-                                                %>
-
-
-                                            </select>
-
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="">Tipo Habitación</span>
+                                                </div>
+                                                <select class="custom-select" name="tipohabitacion" required>
+                                                    <option selected>Selecciona una habitacion</option>
+                                                    <%
+                                                        DAO_Habitacion obj_h = new DAO_Habitacion();
+                                                        ArrayList<DTO_Tipo_Habitacion> listaTh = obj_h.listatp();
+                                                        for (int ida = 0; ida < listaTh.size(); ida++) {
+                                                    %>
+                                                    <option value="<% out.print(listaTh.get(ida).getId_tipo()); %>"><% out.print(listaTh.get(ida).getTipo_h());  %></option>
+                                                    <%                                                        }
+                                                    %>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            Fecha de Inicio<input type="date" name="Fecha_in" class="form-control ">
+                                        <div class="form-group col-md-6">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="">Fecha de Inicio</span>
+                                                </div>
+                                                <input type="date" name="Fecha_in" class="form-control" required>
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            Fecha de Salida<input type="date" name="Fecha_sal" class="form-control ">
+                                        <div class="form-group col-md-6">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="">Fecha de Salida</span>
+                                                </div>
+                                                <input type="date" name="Fecha_sal" class="form-control" required>
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            Numero de Personas
-                                            <select id="inputState" class="form-control" name="nropersona">
-                                                <option selected>Selecciona cantidad</option>
-                                                <%
-                                                    ArrayList<DTO_Habitacion> listaN = obj_h.listanro();
-                                                    for (int idb = 0; idb < listaN.size(); idb++) {
-                                                %>
-                                                <option value="<% out.print(listaN.get(idb).getNro_persona()); %>"><% out.print(listaN.get(idb).getNro_persona()); %>
-                                                </option>
-                                                <%                                                        }
-                                                %>                    
-                                            </select>
+                                        <div class="form-group col-md-6">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="">Número de Personas</span>
+                                                </div>
+                                                <select id="inputState" class="form-control" name="nropersona" required>
+                                                    <option selected>Selecciona cantidad</option>
+                                                    <%
+                                                        ArrayList<DTO_Habitacion> listaN = obj_h.listanro();
+                                                        for (int idb = 0; idb < listaN.size(); idb++) {
+                                                    %>
+                                                    <option value="<% out.print(listaN.get(idb).getNro_persona()); %>"><% out.print(listaN.get(idb).getNro_persona()); %>
+                                                    </option>
+                                                    <%                                                        }
+                                                    %>                    
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            User <input type="number" class="form-control " name="identificacion">
+                                        <%if ((session.getAttribute("cliente") == null) && (session.getAttribute("usuarioN") == null)) {
+                                        %>
+                                        <div class="form-group col-md-6">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="">Documento</span>
+                                                </div>
+                                                <input type="number" class="form-control " name="identificacion" required>
+                                            </div>
                                         </div>
-
-                                        <br><br>
+                                        <%}
+                                        %>
+                                        <br>
                                         <div class="form-group col-md-4">  
                                             <button type="submit" class="btn btn-primary" >Reservar</button>
                                         </div>
