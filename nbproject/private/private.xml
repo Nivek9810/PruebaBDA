@@ -5,7 +5,9 @@
         <group>
             <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/Correo.java</file>
             <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Controlador/Enviar.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Modelo/DAO_Reserva.java</file>
             <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/web/index.jsp</file>
+            <file>file:/C:/Users/user/Documents/GitHub/PruebaBDA/src/java/Controlador/ServletReserva.java</file>
         </group>
     </open-files>
 </project-private>

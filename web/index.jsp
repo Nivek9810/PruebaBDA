@@ -79,7 +79,7 @@
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contactenos</a>
                                 </li>
 
-                                
+
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#reserva" role="tab" aria-controls="contact" aria-selected="false">Reserva</a>
                                 </li>
@@ -351,7 +351,7 @@
                                                     <span class="input-group-text" id="">Tipo Habitación</span>
                                                 </div>
                                                 <select class="custom-select" name="tipohabitacion" required>
-                                                    <option selected>Selecciona una habitacion</option>
+                                                    <option selected>Selecciona una habitación</option>
                                                     <%
                                                         DAO_Habitacion obj_h = new DAO_Habitacion();
                                                         ArrayList<DTO_Tipo_Habitacion> listaTh = obj_h.listatp();
@@ -384,17 +384,18 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="">Número de Personas</span>
                                                 </div>
-                                                <select id="inputState" class="form-control" name="nropersona" required>
-                                                    <option selected>Selecciona cantidad</option>
-                                                    <%
-                                                        ArrayList<DTO_Habitacion> listaN = obj_h.listanro();
-                                                        for (int idb = 0; idb < listaN.size(); idb++) {
-                                                    %>
-                                                    <option value="<% out.print(listaN.get(idb).getNro_persona()); %>"><% out.print(listaN.get(idb).getNro_persona()); %>
-                                                    </option>
-                                                    <%                                                        }
-                                                    %>                    
-                                                </select>
+                                                <input type="number" name="nroper" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <div class="input-group">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">Pago &nbsp;<strong>$</strong></span>
+                                                </div>
+                                                <input type="number" class="form-control" name="pago" aria-label="Amount (to the nearest dollar)">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">0.00</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <%if ((session.getAttribute("cliente") == null) && (session.getAttribute("usuarioN") == null)) {
@@ -402,7 +403,7 @@
                                         <div class="form-group col-md-6">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="">Documento</span>
+                                                    <span class="input-group-text" id="">Nro. Cliente</span>
                                                 </div>
                                                 <input type="number" class="form-control " name="identificacion" required>
                                             </div>

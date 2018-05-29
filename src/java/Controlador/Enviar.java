@@ -107,11 +107,11 @@ public class Enviar extends HttpServlet {
                 session.setAttribute("usuarioN", objPer.getNombre());
                 session.setAttribute("correo", objPer.getCorreo());
                 session.setAttribute("documento", objPer.getId_persona());
-                Mensaje = "Bienvenido " + objPer.getNombre() + ", para nosotros es un gusto saber que eres parte de nosotros. "
-                        + "Recuerda cambiar tu contraseña, cuando ingreses a la plataforma. "
+                Mensaje = "Bienvenido " + objPer.getNombre() + ", para nosotros es un gusto saber que eres parte de nosotros. \n"
+                        + "Ahora puedes hacer tus reservas desde nuestra plataforma ingresando tu documento. \n"
                         + "Recuerda completar tu reserva";
 
-                Asunto = objPer.getNombre() + " | Nueva contraseña";
+                Asunto = objPer.getNombre() + " | Bienvenido a HospedajeReal";
                 if (mail.enviarCorreo(correo, Mensaje, Asunto, null)) {
                     out.println("<script type='text/javascript'> alert('Correo enviado!'); </script>");
                 } else {
