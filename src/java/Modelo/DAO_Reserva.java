@@ -70,20 +70,13 @@ public class DAO_Reserva {
 
     public ArrayList<DTO_Habitacion> buscarReserva(Date fecha_inicio, Date fecha_fin, int Cant_personas, int id_tipoh) throws SQLException {
         ArrayList<DTO_Habitacion> listh = new ArrayList<>();
-        String sql = "SELECT H.* \n"
-                + "FROM TIPO_HABITACION AS TH\n"
-                + "INNER JOIN HABITACION AS H\n"
-                + "ON TH.id_tipo = H.id_tipo \n"
-                + "WHERE H.id_tipo = "+id_tipoh+" AND H.nro_persona >= "+Cant_personas+" AND H.nro_habitacion = (\n"
-                + "	SELECT RH.nro_habitacion \n"
-                + "FROM RESERVA_HABITACION AS RH \n"
-                + "WHERE '"+fecha_inicio+"' NOT BETWEEN RH.fecha_llegada AND RH.fecha_salida AND '"+fecha_fin+"' NOT BETWEEN RH.fecha_llegada AND RH.fecha_salida);";
+        String sql = "SELECT H.* FROM TIPO_HABITACION AS TH INNER JOIN HABITACION AS H ON TH.id_tipo = H.id_tipo WHERE H.id_tipo = " + id_tipoh + " AND H.nro_persona >= " + Cant_personas + " AND H.nro_habitacion = (	SELECT RH.nro_habitacion FROM RESERVA_HABITACION AS RH WHERE '" + fecha_inicio + "' NOT BETWEEN RH.fecha_llegada AND RH.fecha_salida AND '" + fecha_fin + "' NOT BETWEEN RH.fecha_llegada AND RH.fecha_salida);";
         resultSet = statement.executeQuery(sql);
-        while (resultSet.next()) {            
+        while (resultSet.next()) {
             listh.add(new DTO_Habitacion(resultSet.getInt("nro_habitacion"),
                     resultSet.getInt("id_tipo"),
-                    resultSet.getFloat("valor_habitacion"), 
-                    resultSet.getString("descripcion"), 
+                    resultSet.getFloat("valor_habitacion"),
+                    resultSet.getString("descripcion"),
                     resultSet.getInt("nro_persona")));
         }
         return listh;
@@ -101,14 +94,31 @@ public class DAO_Reserva {
         return lista_TipoH;
     }
 
-    public boolean generarReservaLlegada(DTO_Reserva objRes) throws SQLException {
-        String consulta = "INSERT INTO RESERVA (pago, fecha_hora_)";
-        boolean r = false;
-        int res = statement.executeUpdate(consulta);
+    public String generarReservaLlegada(Float pago, String id_cliente, String id_empleado, int Cant) throws SQLException {
+        if (id_empleado.equals("")) {
+            id_empleado = "5010";
+        }
+        String consultaR = "INSERT INTO "
+                + "RESERVA (pago, id_empleado, id_cliente, cantidad) "
+                + "VALUES (" + pago + ",'"
+                + id_empleado + "','"
+                + id_cliente + "',"
+                + Cant + ");";
+        String SQLres = "SELECT * FROM reserva ORDER BY id_reserva ASC LIMIT 1;";
+        String r = "";
+        int res = statement.executeUpdate(consultaR);
         if (res > 0) {
-            r = true;
+            resultSet = statement.executeQuery(SQLres);
+            while (resultSet.next()) {
+                r = resultSet.getString("id_reserva");
+            }
         }
         return r;
+    }
+
+    public boolean generarReservaHabitacion() {
+        
+        return true;
     }
 
 }

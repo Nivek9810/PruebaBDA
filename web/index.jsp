@@ -344,7 +344,7 @@
                                     <button class="btn btn-primary" data-toggle="modal" data-target="#registroModal">Enviar</button>
                                 </div>
                                 <div class="tab-pane fade" id="reserva" role="tabpanel" aria-labelledby="profile-tab">
-                                    <form method="POST" action="ServletReserva">
+                                    <form method="POST" action="ServletVerReserva">
                                         <div class="form-group col-md-6">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">

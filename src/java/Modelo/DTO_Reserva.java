@@ -12,13 +12,42 @@ import java.util.*;
  * @author Familia MV
  */
 public class DTO_Reserva {
-    
+
     private Integer Id_Reserva;
     private Float Pago;
     private Date Fecha_Hora_Entrada;
     private Date Fecha_Hora_Salida;
     private Integer Id_EmpleadoFK;
     private Integer Id_Cliente;
+    private Integer Cantidad;
+
+    public DTO_Reserva(Integer Id_Reserva, Float Pago, Date Fecha_Hora_Entrada, Date Fecha_Hora_Salida, Integer Id_EmpleadoFK, Integer Id_Cliente, Integer Cantidad) {
+        this.Id_Reserva = Id_Reserva;
+        this.Pago = Pago;
+        this.Fecha_Hora_Entrada = Fecha_Hora_Entrada;
+        this.Fecha_Hora_Salida = Fecha_Hora_Salida;
+        this.Id_EmpleadoFK = Id_EmpleadoFK;
+        this.Id_Cliente = Id_Cliente;
+        this.Cantidad = Cantidad;
+    }
+
+    public DTO_Reserva() {
+        this.Id_Reserva = 0;
+        this.Pago = null;
+        this.Fecha_Hora_Entrada = null;
+        this.Fecha_Hora_Salida = null;
+        this.Id_EmpleadoFK = 0;
+        this.Id_Cliente = 0;
+        this.Cantidad = 0;
+    }
+
+    public Integer getCantidad() {
+        return Cantidad;
+    }
+
+    public void setCantidad(Integer Cantidad) {
+        this.Cantidad = Cantidad;
+    }
 
     public Integer getId_Reserva() {
         return Id_Reserva;
@@ -67,9 +96,5 @@ public class DTO_Reserva {
     public void setId_Cliente(Integer Id_Cliente) {
         this.Id_Cliente = Id_Cliente;
     }
-    
-    
-    
-    
-    
+
 }
