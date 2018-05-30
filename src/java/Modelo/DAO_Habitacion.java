@@ -17,12 +17,10 @@ import java.util.ArrayList;
  */
 public class DAO_Habitacion {
 
-    private DTO_Habitacion_V objHV;
     private DTO_Habitacion objH;
-    private ArrayList<DTO_Habitacion_V> lst_HV;
     private ArrayList<DTO_Tipo_Habitacion> lista_tipoh;
     private ArrayList<DTO_Habitacion> nro_Persona;
-    private ArrayList<DTO_Habitacion> lst_Nacionalidad;
+    private ArrayList<DTO_Habitacion> lst_Hab;
 
     private Statement statement;
     private Conexion con;
@@ -30,11 +28,9 @@ public class DAO_Habitacion {
     private Connection conection;
 
     public DAO_Habitacion() throws SQLException {
-        this.objHV = new DTO_Habitacion_V();
         this.objH = new DTO_Habitacion();
-        
-        this.lst_HV = new ArrayList<>();
-        this.lst_Nacionalidad = new ArrayList<>();
+
+        this.lst_Hab = new ArrayList<>();
         this.lista_tipoh = new ArrayList<>();
         this.nro_Persona = new ArrayList<>();
 
@@ -45,11 +41,11 @@ public class DAO_Habitacion {
         this.statement = conection.createStatement();
     }
 
-    public DAO_Habitacion(DTO_Habitacion_V objHV, DTO_Habitacion objH, ArrayList<DTO_Habitacion_V> lst_HV, ArrayList<DTO_Tipo_Habitacion> lista_tipoh, Statement statement, Conexion con, ResultSet resultSet, Connection conection) {
-        this.objHV = objHV;
+    public DAO_Habitacion(DTO_Habitacion objH, ArrayList<DTO_Tipo_Habitacion> lista_tipoh, ArrayList<DTO_Habitacion> nro_Persona, ArrayList<DTO_Habitacion> lst_Hab, Statement statement, Conexion con, ResultSet resultSet, Connection conection) {
         this.objH = objH;
-        this.lst_HV = lst_HV;
         this.lista_tipoh = lista_tipoh;
+        this.nro_Persona = nro_Persona;
+        this.lst_Hab = lst_Hab;
         this.statement = statement;
         this.con = con;
         this.resultSet = resultSet;
@@ -66,31 +62,31 @@ public class DAO_Habitacion {
         return lista_tipoh;
     }
 
-    public ArrayList<DTO_Habitacion_V> listaHab(Integer id_tipo) throws SQLException {
-        lst_HV.clear();
-        String consulta = "SELECT * FROM habitacion WHERE id_tipo = " + id_tipo + "; "; 
+    public ArrayList<DTO_Habitacion> listaHab(Integer id_tipo) throws SQLException {
+        this.lst_Hab.clear();
+        String consulta = "SELECT * FROM habitacion WHERE id_tipo = " + id_tipo + "; ";
         resultSet = statement.executeQuery(consulta);
         while (resultSet.next()) {
-            this.objHV.setTipo(resultSet.getString("tipo_h"));
-            this.objHV.setNro_Habitacion(resultSet.getInt("nro_habitacion"));
-            this.objHV.setValor_Habitacion(resultSet.getFloat("valor_habitacion"));
-            this.objHV.setDescripcion(resultSet.getString("descripcion"));
-            this.objHV.setNro_persona(resultSet.getInt("nro_persona"));
-            lst_HV.add(objHV);
+            this.objH = new DTO_Habitacion(resultSet.getInt("nro_habitacion"),
+                    id_tipo,
+                    resultSet.getFloat("valor_habitacion"),
+                    resultSet.getString("descripcion"),
+                    resultSet.getInt("nro_persona"));
+            this.lst_Hab.add(objH);
         }
-        return lst_HV;
+        return this.lst_Hab;
     }
-    
-    public ArrayList<DTO_Habitacion>listanro() throws SQLException{
+
+    public ArrayList<DTO_Habitacion> listanro() throws SQLException {
         nro_Persona.clear();
-        String consulta="SELECT * FROM HABITACION;";
+        String consulta = "SELECT * FROM HABITACION;";
         resultSet = statement.executeQuery(consulta);
-        while(resultSet.next()){
-         nro_Persona.add(new DTO_Habitacion(resultSet.getInt("Nro_Habitacion"),
-                 resultSet.getInt("Id_Tipo"),
-                 resultSet.getFloat("Valor_Habitacion"),
-                 resultSet.getString("Descripcion"),
-                 resultSet.getInt("Nro_Persona")));
+        while (resultSet.next()) {
+            nro_Persona.add(new DTO_Habitacion(resultSet.getInt("Nro_Habitacion"),
+                    resultSet.getInt("Id_Tipo"),
+                    resultSet.getFloat("Valor_Habitacion"),
+                    resultSet.getString("Descripcion"),
+                    resultSet.getInt("Nro_Persona")));
         }
         return nro_Persona;
     }

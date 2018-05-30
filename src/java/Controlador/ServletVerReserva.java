@@ -5,8 +5,7 @@
  */
 package Controlador;
 
-import Modelo.DAO_Reserva;
-import Modelo.DTO_Habitacion;
+import Modelo.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -73,10 +72,10 @@ public class ServletVerReserva extends HttpServlet {
         String fecha_SalF = request.getParameter("Fecha_sal");
         int nropersona = Integer.parseInt(request.getParameter("nroper"));
         String identificador = request.getParameter("identificacion");
+        String empleado = (String) request.getSession().getAttribute("usuario");
         float pago = Float.parseFloat(request.getParameter("pago"));
-        int nrohabitacion = 0;
-        if (identificador == null) {
-            identificador = (String) request.getSession().getAttribute("user");
+        if (empleado == null) {
+            empleado = "5010";
         }
         DateFormat formatter;
         formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -89,7 +88,7 @@ public class ServletVerReserva extends HttpServlet {
             Logger.getLogger(ServletVerReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
         PrintWriter out = response.getWriter();
-        
+
         out.println("<!DOCTYPE html>");
         out.println("<html>");
         out.println("<head>");
@@ -99,22 +98,25 @@ public class ServletVerReserva extends HttpServlet {
         out.println("<title>Home</title>");
         out.println("</head>");
         out.println("<body>");
+        out.println("<div class='container'>");
         try {
             DAO_Reserva objRes = new DAO_Reserva();
-            if (nrohabitacion == 0) {
-                
-                ArrayList<DTO_Habitacion> lstH = objRes.buscarReserva(fecha_inicio, fecha_sal, nropersona, tipohabitacion);
-                
-                out.println("<div class='container'>");
-                
-                out.println("<div class='modal fade bd-example-modal-lg' id='exampleModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>");
-                out.println("<div class='modal-dialog modal-lg' role='document'>");
-                out.println("            <div class='modal-content'>");
-                out.println("                <div class='modal-header'>");
-                out.println("                    <h5 class='modal-title' id='exampleModalLabel'>Listado de opciones para el tipo de habitación " + tipohabitacion + "</h5>");
-                out.println("                </div>");
-                out.println("                <div class='modal-body'>");
-                out.println("                   <form method='POST' action='ServletVerReserva'>");
+
+            ArrayList<DTO_Habitacion> lstH = objRes.buscarReserva(fecha_inicio, fecha_sal, nropersona, tipohabitacion);
+
+            out.println("<div class='modal fade bd-example-modal-lg' id='exampleModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>");
+            out.println("<div class='modal-dialog modal-lg' role='document'>");
+            out.println("            <div class='modal-content'>");
+            out.println("                <div class='modal-header'>");
+            out.println("                    <h5 class='modal-title' id='exampleModalLabel'>Listado de opciones para el tipo de habitación seleccionado </h5>");
+            out.println("                </div>");
+            out.println("                <div class='modal-body'>");
+            if (lstH.isEmpty()) {
+                out.println("<div class='alert alert-warning' role='alert'>");
+                out.println(" <p class='lead'>Es probable que no haya habitaciones disponibles según las características que buscas</p>");
+                out.println("</div>");
+            } else {
+                out.println("                   <form method='POST' action='ServletReservar'>");
                 out.println("                   <table class='table table-striped'>");
                 out.println("                        <thead class='thead-dark'>");
                 out.println("                            <tr>");
@@ -133,11 +135,17 @@ public class ServletVerReserva extends HttpServlet {
                     out.println("                                <td>" + lstH.get(i).getDescripcion() + "</td>");
                     out.println("                                <td>" + lstH.get(i).getNro_persona() + "</td>");
                     out.println("                                <td>");
+                    out.println("                                    <input type='date' class='form-control' name='fechain' value='" + fecha_InicioF + "' hidden>");
+                    out.println("                                    <input type='date' class='form-control' name='fechasal' value='" + fecha_SalF + "' hidden>");
+                    out.println("                                    <input type='text' class='form-control' name='idcliente' value='" + identificador + "' hidden>");
+                    out.println("                                    <input type='text' class='form-control' name='cantper' value='" + nropersona + "' hidden>");
+                    out.println("                                    <input type='text' class='form-control' name='pago' value='" + pago + "' hidden>");
+                    out.println("                                    <input type='text' class='form-control' name='id_empleado' value='" + empleado + "' hidden>");
                     out.println("                                    <div class='custom-control custom-radio'>");
                     if (i == 0) {
-                    out.println("                                        <input type='radio' value='" + lstH.get(i).getNro_Habitacion() + "' id='customRadio" + i + "' name='nroHab' class='custom-control-input' checked>");
+                        out.println("                                        <input type='radio' value='" + lstH.get(i).getNro_Habitacion() + "' id='customRadio" + i + "' name='nroHab' class='custom-control-input' checked>");
                     } else {
-                    out.println("                                        <input type='radio' value='" + lstH.get(i).getNro_Habitacion() + "' id='customRadio" + i + "' name='nroHab' class='custom-control-input'>");
+                        out.println("                                        <input type='radio' value='" + lstH.get(i).getNro_Habitacion() + "' id='customRadio" + i + "' name='nroHab' class='custom-control-input'>");
                     }
                     out.println("                                        <label class='custom-control-label' for='customRadio" + i + "'>Reservar</label>");
                     out.println("                                    </div></td>");
@@ -145,22 +153,22 @@ public class ServletVerReserva extends HttpServlet {
                 }
                 out.println("                       </tbody>");
                 out.println("                    </table>");
-                out.println("                   </form>");
-                out.println("                </div>");
-                out.println("                <div class='modal-footer'>");
-                out.println("                    <input type='submit' class='btn btn-outline-success' value='Reservar' >");
-                out.println("                    <a role='button' class='btn btn-outline-primary' href='index.jsp'>Volver</a>");
-                out.println("                    ");
-                out.println("                </div>");
-                out.println("            </div>");
-                out.println("        </div>");
-                out.println("    </div>");
-                
-            } else {
-                //Integer.parseInt(request.getParameter("nroHab"))
-                objRes.generarReservaLlegada(pago, identificador, "", nropersona);
-                
+
             }
+            out.println("                </div>");
+            out.println("                <div class='modal-footer'>");
+            if (!lstH.isEmpty()) {
+                out.println("                    <input type='submit' class='btn btn-outline-success' value='Reservar' >");
+            }
+
+            out.println("                    <a role='button' class='btn btn-outline-primary' href='index.jsp'>Volver</a>");
+            out.println("                    ");
+            out.println("                   </form>");
+            out.println("                </div>");
+            out.println("            </div>");
+            out.println("        </div>");
+            out.println("    </div>");
+
         } catch (SQLException ex) {
             out.println("<h3>" + ex.getLocalizedMessage() + "<br><br>" + ex.getMessage() + "<br><br>" + ex.getSQLState() + "</h3>");
             //response.sendRedirect("index.jsp");

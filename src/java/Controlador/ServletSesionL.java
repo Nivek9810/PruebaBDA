@@ -83,6 +83,7 @@ public class ServletSesionL extends HttpServlet {
 
             } else if (usu.equals(objEmp.getId_Empleado()) && pass.equals(objEmp.getContrasena()) && sesion.getAttribute("usuario") == null) {
                 sesion.setAttribute("usuario", objPerE.getNombre());
+                sesion.setAttribute("id_empleado", objEmp.getId_Empleado());
                 sesion.setMaxInactiveInterval(60);
                 response.sendRedirect("index.jsp");
 

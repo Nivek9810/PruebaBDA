@@ -5,8 +5,13 @@
  */
 package Controlador;
 
+import Modelo.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,18 +35,6 @@ public class ReservarCategoria extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ReservarCategoria</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ReservarCategoria at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,8 +49,6 @@ public class ReservarCategoria extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Integer id_Tipo = Integer.parseInt(request.getParameter("id_tipoH"));
-
         processRequest(request, response);
     }
 
@@ -72,6 +63,7 @@ public class ReservarCategoria extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Integer tipo = Integer.parseInt(request.getParameter("id_tipoH"));
         PrintWriter out = response.getWriter();
         out.println("<!DOCTYPE html>");
         out.println("<html>");
@@ -84,7 +76,17 @@ public class ReservarCategoria extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         out.println("<div class='container'>");
-        
+        DAO_Habitacion objH;
+        try {
+            objH = new DAO_Habitacion();
+            ArrayList<DTO_Habitacion> ListaHV = objH.listaHab(tipo);
+            for (int j = 0; j < ListaHV.size(); j++) {
+                out.println("<p class='lead'>Id: " + ListaHV.get(j).getDescripcion()+"<br></p>");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservarCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         out.println("</div>");
         out.println("<script src='https://code.jquery.com/jquery-3.3.1.slim.min.js' integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo' crossorigin='anonymous'></script>");
         out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js' integrity='sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ' crossorigin='anonymous'></script>");

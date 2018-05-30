@@ -17,12 +17,12 @@
         <servlet-class>Controlador.ReservarCategoria</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletReservar</servlet-name>
-        <servlet-class>Controlador.ServletReservar</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ServletVerReserva</servlet-name>
         <servlet-class>Controlador.ServletVerReserva</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletReservar</servlet-name>
+        <servlet-class>Controlador.ServletReservar</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Enviar</servlet-name>
@@ -41,12 +41,12 @@
         <url-pattern>/ReservarCategoria</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletReservar</servlet-name>
-        <url-pattern>/ServletReservar</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ServletVerReserva</servlet-name>
         <url-pattern>/ServletVerReserva</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletReservar</servlet-name>
+        <url-pattern>/ServletReservar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

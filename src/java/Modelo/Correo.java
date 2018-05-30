@@ -7,11 +7,9 @@ package Modelo;
 
 import java.util.Properties;
 import javax.activation.DataHandler;
-import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
 import javax.mail.Message;
-import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -72,7 +70,7 @@ public class Correo {
                 BodyPart texto = new MimeBodyPart();
                 texto.setText(mensaje);
                 BodyPart adjunto = new MimeBodyPart();
-                adjunto.setDataHandler(new DataHandler(new FileDataSource("C:/Users/user/Desktop/"+archivo+".pdf")));
+                adjunto.setDataHandler(new DataHandler(new FileDataSource("C:/Users/user/Desktop/" + archivo + ".pdf")));
                 adjunto.setFileName("Declaración de gastos.pdf");
                 MimeMultipart multiParte = new MimeMultipart();
                 multiParte.addBodyPart(texto);

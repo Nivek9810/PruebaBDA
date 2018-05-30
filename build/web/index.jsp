@@ -3,6 +3,8 @@
     Created on : 24-may-2018, 19:48:55
     Author     : user
 --%>
+<%@page import="java.util.GregorianCalendar"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Modelo.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -87,9 +89,6 @@
                                 %>
                                 <%} else if (session.getAttribute("cliente") != null) {
                                 %>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#reserva" role="tab" aria-controls="contact" aria-selected="false">Reserva</a>
-                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#servicios" role="tab" aria-controls="contact" aria-selected="false">Servicios</a>
                                 </li>
@@ -363,12 +362,21 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <%
+                                            Calendar c = new GregorianCalendar();
+                                            String dia = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
+                                            String mes = "0" + Integer.toString(c.get(Calendar.MONTH) + 1);
+                                            if (c.get(Calendar.MONTH) + 1 > 10) {
+                                                mes = Integer.toString(c.get(Calendar.MONTH) + 1);
+                                            }
+                                            String annio = Integer.toString(c.get(Calendar.YEAR));
+                                        %>
                                         <div class="form-group col-md-6">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="">Fecha de Inicio</span>
                                                 </div>
-                                                <input type="date" name="Fecha_in" class="form-control" required>
+                                                <input type="date" name="Fecha_in" min="<% out.print(annio + "-" + mes + "-" + dia); %>" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
@@ -376,7 +384,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="">Fecha de Salida</span>
                                                 </div>
-                                                <input type="date" name="Fecha_sal" class="form-control" required>
+                                                <input type="date" name="Fecha_sal" min="<% out.print(annio + "-" + mes + "-" + dia); %>" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
@@ -403,7 +411,7 @@
                                         <div class="form-group col-md-6">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="">Nro. Cliente</span>
+                                                    <span class="input-group-text" id="">Cédula</span>
                                                 </div>
                                                 <input type="number" class="form-control " name="identificacion" required>
                                             </div>
@@ -419,78 +427,61 @@
                                 </div>
                                 <div class="tab-pane fade" id="servicios" role="tabpanel" aria-labelledby="profile-tab">
                                     <form action="ServletServicios" method="POST">
-
                                         <div class="row">
-                                            <div class="col-4">
-                                                <div class="list-group" id="list-tab" role="tablist">
-                                                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="Servicio de Bebidas">Servicio de Bebidas</a>
-                                                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="Servicio de Comida">Servicio de Comida</a>
-                                                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="Servicio de Aseo">Servicio de Aseo</a>
+                                            <div class="col-3">
+                                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+                                                    <a class="nav-link" id="v-pills-alimento-tab" data-toggle="pill" href="#v-pills-alimento" role="tab" aria-controls="v-pills-alimento" aria-selected="false">Servicio de Alimento</a>
+                                                    <a class="nav-link" id="v-pills-bebida-tab" data-toggle="pill" href="#v-pills-bebida" role="tab" aria-controls="v-pills-bebida" aria-selected="false">Servicio de bebida</a>
+                                                    <a class="nav-link" id="v-pills-aseo-tab" data-toggle="pill" href="#v-pills-aseo" role="tab" aria-controls="v-pills-aseo" aria-selected="false">Servicio de aseo</a>
                                                 </div>
                                             </div>
-                                            <div class="col-8">
-                                                <div class="tab-content" id="nav-tabContent">
-                                                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-
-                                                        <div class="form-group">
-                                                            <select class="custom-select" required>
-                                                                <option value="">Selecione Servicio</option>
-                                                                <option value=""></option>
-                                                                <option value=""></option>
-                                                                <option value=""></option>
-                                                            </select>
-                                                            <label>Digite cantidad</label>
-                                                            <input class="form-control" type="text" placeholder="" name="bebida">
-                                                            <div class="invalid-feedback">Seleccione Un Servicio</div>
-                                                            <br>
-                                                            <input class="btn btn-outline-primary" type="submit" value="Enviar">
-                                                        </div>
-
-
+                                            <div class="col-9">
+                                                <div class="tab-content" id="v-pills-tabContent">
+                                                    <div class="tab-pane fade" id="v-pills-alimento" role="tabpanel" aria-labelledby="v-pills-alimento-tab">
+                                                        <label for="list-tab">Servicio Alimentos</label>
+                                                        <select class="custom-select" name="comida" required>
+                                                            <%                                                        DAO_Servicio obj_s = new DAO_Servicio();
+                                                                ArrayList<DTO_Nombre_Servicio> lista_alimen = obj_s.lista_Ali();
+                                                                for (int idv = 0; idv < lista_alimen.size(); idv++) {
+                                                            %>
+                                                            <option value = "<% out.print(lista_alimen.get(idv).getId_Noms());%>" > <% out.print(lista_alimen.get(idv).getServicio());  %> </option>
+                                                            <%                                                        }
+                                                            %> 
+                                                        </select>
                                                     </div>
-                                                    <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                                                    <div class="tab-pane fade" id="v-pills-bebida" role="tabpanel" aria-labelledby="v-pills-bebida-tab">
+                                                        <label for="list-tab">Servicio Bebida</label>
+                                                        <select class="custom-select" name="bebida" required>
+                                                            <%
+                                                                ArrayList<DTO_Nombre_Servicio> lista_bebi = obj_s.lista_Bebi();
+                                                                for (int idf = 0; idf < lista_bebi.size(); idf++) {
+                                                            %>
+                                                            <option value = "<% out.print(lista_bebi.get(idf).getId_Noms());%>" > <% out.print(lista_bebi.get(idf).getServicio());  %> </option>
+                                                            <%                                                        }
+                                                            %> 
 
-                                                        <div class="form-group">
-                                                            <select class="custom-select" required>
-                                                                <option value="">Selecione Servicio</option>
-                                                                <option value="1"></option>
-                                                                <option value="2"></option>
-                                                                <option value="3"></option>
-                                                            </select>
-                                                            <label>Digite cantidad</label>
-                                                            <input class="form-control" type="text" placeholder="" name="comida">
-                                                            <div class="invalid-feedback">Example invalid custom select feedback</div>
-                                                            <br>
-                                                            <input class="btn btn-outline-primary" type="submit" value="Enviar">
-                                                        </div>
-
-
+                                                        </select>
                                                     </div>
-                                                    <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+                                                    <div class="tab-pane fade" id="v-pills-aseo" role="tabpanel" aria-labelledby="v-pills-aseo-tab">
 
-                                                        <div class="form-group">
-                                                            <select class="custom-select" required>
-                                                                <option value="">Selecione Servicio</option>
-                                                                <option value=""></option>
-                                                                <option value=""></option>
-                                                                <option value=""></option>
-                                                            </select>
-                                                            <label>Digite cantidad</label>
-                                                            <input class="form-control" type="text" placeholder="" name="aseo">
+                                                        <label for="list-tab">Servicio Aseo</label>
+                                                        <select class="custom-select" name="aseo" required>
 
-                                                            <br>
-                                                            <input class="btn btn-outline-primary" type="submit" value="Enviar">
-                                                            <div class="invalid-feedback">Example invalid custom select feedback</div>
+                                                            <%
+                                                                ArrayList<DTO_Nombre_Servicio> lista_ase = obj_s.lista_Ase();
+                                                                for (int idw = 0; idw < lista_ase.size(); idw++) {
+                                                            %>
+                                                            <option value = "<% out.print(lista_ase.get(idw).getId_Noms());%>" > <% out.print(lista_ase.get(idw).getServicio());  %> </option>
+                                                            <%                                                        }
+                                                            %> 
 
-                                                        </div>
-
+                                                        </select>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
-
-                                    </form>  
+                                    </form> 
                                 </div>
 
                             </div>
@@ -551,8 +542,8 @@
                                                                     <td><%//out.print(ListaHV.get(j).getNro_persona());%></td>
                                                                     <td>
                                                                         <form action="ReservarCategoria" method="POST">
-                                                                            <input type="text" value="<% out.print(ListaTH.get(i).getId_tipo());%>" hidden name="id_tipoH">
-                                                                            <input type="submit" class="btn btn-outline-primary" value="Reservar">
+                                                                            <input type="text" name="id_tipoH" hidden="true">
+                                                                            <button type="submit" class="btn btn-outline-primary">Reservar</button>
                                                                         </form>
                                                                     </td>
                                                                 </tr>
@@ -563,7 +554,6 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                        <button type="submit" class="btn btn-primary">Aceptar</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -641,7 +631,6 @@
                                         </thead>
                                         <tbody>
                                             <%
-
                                                 String consultaIn = "SELECT * FROM habitacion WHERE nro_habitacion IN (SELECT nro_habitacion FROM reserva_habitacion WHERE (current_date) BETWEEN fecha_llegada AND fecha_salida);";
                                                 ArrayList<DTO_Habitacion> lstHabIn = objRes.listarReserva(consultaIn);
                                                 for (int j = 0; j < lstHabIn.size(); j++) {
@@ -732,6 +721,17 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+                                        $('#resCatModal').on('show.bs.modal', function (event) {
+                                            var button = $(event.relatedTarget) // Button that triggered the modal
+                                            var recipient = button.data('whatever') // Extract info from data-* attributes
+                                            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                                            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                                            var modal = $(this)
+                                            modal.find('.modal-title').text('Tipo de Habitación ' + recipient)
+                                            modal.find('.modal-body input').val(recipient)
+                                        })
+        </script>
     </body>
 </html>
 

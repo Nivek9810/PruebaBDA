@@ -18,6 +18,22 @@ public class DTO_Reserva_Habitacion {
     private Date Fecha_Llegada;
     private Date Fecha_Salida;
 
+    public DTO_Reserva_Habitacion() {
+        this.Id_ReservaFK = 0;
+        this.Nro_HabitacionFK = 0;
+        this.Fecha_Llegada = null;
+        this.Fecha_Salida = null;
+    }
+
+    public DTO_Reserva_Habitacion(Integer Id_ReservaFK, Integer Nro_HabitacionFK, Date Fecha_Llegada, Date Fecha_Salida) {
+        this.Id_ReservaFK = Id_ReservaFK;
+        this.Nro_HabitacionFK = Nro_HabitacionFK;
+        this.Fecha_Llegada = Fecha_Llegada;
+        this.Fecha_Salida = Fecha_Salida;
+    }
+    
+    
+
     public Integer getId_ReservaFK() {
         return Id_ReservaFK;
     }

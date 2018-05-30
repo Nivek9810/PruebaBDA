@@ -35,18 +35,6 @@ public class ServletContrasena extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletContrasena</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletContrasena at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -80,7 +68,7 @@ public class ServletContrasena extends HttpServlet {
             passn = request.getParameter("passwordn");
             correo = (String) sesion.getAttribute("correo");
             boolean Usuario = cambio.CambiarContra(usu, pass, passn);
-            mensaje = sesion.getAttribute("cliente")+", tu contraseña ha sido actualizada exitosamente. \n"+passn.substring(0, 2)+"****  \n\n\nGracias por ser parte de nosotros.";
+            mensaje = sesion.getAttribute("cliente")+", tu contraseña ha sido actualizada exitosamente. \n"+pass.substring(0, 2)+"****  \n\n\nGracias por ser parte de nosotros.";
             asunto = "Cambio de contraseña | "+sesion.getAttribute("cliente");            
             
             if (Usuario) {

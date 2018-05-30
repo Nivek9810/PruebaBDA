@@ -17,15 +17,22 @@ public class DTO_Reserva {
     private Float Pago;
     private Date Fecha_Hora_Entrada;
     private Date Fecha_Hora_Salida;
-    private Integer Id_EmpleadoFK;
-    private Integer Id_Cliente;
+    private String Id_EmpleadoFK;
+    private String Id_Cliente;
     private Integer Cantidad;
 
-    public DTO_Reserva(Integer Id_Reserva, Float Pago, Date Fecha_Hora_Entrada, Date Fecha_Hora_Salida, Integer Id_EmpleadoFK, Integer Id_Cliente, Integer Cantidad) {
+    public DTO_Reserva(Integer Id_Reserva, Float Pago, Date Fecha_Hora_Entrada, Date Fecha_Hora_Salida, String Id_EmpleadoFK, String Id_Cliente, Integer Cantidad) {
         this.Id_Reserva = Id_Reserva;
         this.Pago = Pago;
         this.Fecha_Hora_Entrada = Fecha_Hora_Entrada;
         this.Fecha_Hora_Salida = Fecha_Hora_Salida;
+        this.Id_EmpleadoFK = Id_EmpleadoFK;
+        this.Id_Cliente = Id_Cliente;
+        this.Cantidad = Cantidad;
+    }
+    
+    public DTO_Reserva(Float Pago, String Id_EmpleadoFK, String Id_Cliente, Integer Cantidad) {
+        this.Pago = Pago;
         this.Id_EmpleadoFK = Id_EmpleadoFK;
         this.Id_Cliente = Id_Cliente;
         this.Cantidad = Cantidad;
@@ -36,8 +43,8 @@ public class DTO_Reserva {
         this.Pago = null;
         this.Fecha_Hora_Entrada = null;
         this.Fecha_Hora_Salida = null;
-        this.Id_EmpleadoFK = 0;
-        this.Id_Cliente = 0;
+        this.Id_EmpleadoFK = "";
+        this.Id_Cliente = "";
         this.Cantidad = 0;
     }
 
@@ -81,19 +88,19 @@ public class DTO_Reserva {
         this.Fecha_Hora_Salida = Fecha_Hora_Salida;
     }
 
-    public Integer getId_EmpleadoFK() {
+    public String getId_EmpleadoFK() {
         return Id_EmpleadoFK;
     }
 
-    public void setId_EmpleadoFK(Integer Id_EmpleadoFK) {
+    public void setId_EmpleadoFK(String Id_EmpleadoFK) {
         this.Id_EmpleadoFK = Id_EmpleadoFK;
     }
 
-    public Integer getId_Cliente() {
+    public String getId_Cliente() {
         return Id_Cliente;
     }
 
-    public void setId_Cliente(Integer Id_Cliente) {
+    public void setId_Cliente(String Id_Cliente) {
         this.Id_Cliente = Id_Cliente;
     }
 
