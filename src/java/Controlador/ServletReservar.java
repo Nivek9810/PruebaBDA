@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sun.util.logging.resources.logging;
 
 /**
  *
@@ -111,27 +112,46 @@ public class ServletReservar extends HttpServlet {
             Email objEml = new Email();
             String correo;
 
-            if (cliente.equals("")) {
+            try {
+                if (cliente.isEmpty() || !request.getSession().getAttribute("user").toString().isEmpty()) {
+                    id_cliente = request.getSession().getAttribute("user").toString();
+                    objClienDAO.infoCliente(id_cliente).getId_PerosonaFK();
+                    objPer = objPerDAO.infoUser(objClienDAO.infoCliente(id_cliente).getId_PerosonaFK());
+
+                } else {
+                    objPer = objPerDAO.infoUser(cliente);
+                    correo = objPer.getCorreo();
+                    id_cliente = objClienDAO.crearUsuarioRes(cliente, nroHabitacion);
+                    DTO_Cliente objCliente = objClienDAO.infoCliente(id_cliente);
+                    String MensajeNU = "Hola " + objPer.getNombre() + ", acabaste de hacer una reserva para la fecha " + fecha_InicioF + " al " + fecha_SalF + " \n"
+                            + "Te acabamos de asignar una nueva contraseña para acceder a nuestra plataforma: \n\n "
+                            + "- Usuario: " + objCliente.getId_PerosonaFK() + "\n "
+                            + "- Contraseña: " + objCliente.getContrasenaC() + "\n"
+                            + "Recuerda revisar tus reservas en nuestra plataforma. Y CAMBIAR TU CONTRASEÑA \n\n"
+                            + "Que tengas un lindo día " + objPer.getNombre();
+                    String AsuntoNU = "HospedajeReal | Nueva contraseña " + objPer.getNombre();
+                    if (objEml.enviarCorreo(correo, MensajeNU, AsuntoNU, null)) {
+                        out.println("<script type='application/javascript'> alert('Se te notificará al correo " + objPer.getCorreo() + " tu nueva contraseña.'); </script>");
+                    }
+                }
+            } catch (NullPointerException ex) {
+                ex.getMessage();
                 objPer = objPerDAO.infoUser(cliente);
                 correo = objPer.getCorreo();
                 id_cliente = objClienDAO.crearUsuarioRes(cliente, nroHabitacion);
                 DTO_Cliente objCliente = objClienDAO.infoCliente(id_cliente);
                 String MensajeNU = "Hola " + objPer.getNombre() + ", acabaste de hacer una reserva para la fecha " + fecha_InicioF + " al " + fecha_SalF + " \n"
                         + "Te acabamos de asignar una nueva contraseña para acceder a nuestra plataforma: \n\n "
-                        + "- Usuario: " + objCliente.getId_PerosonaFK()+ "\n "
+                        + "- Usuario: " + objCliente.getId_PerosonaFK() + "\n "
                         + "- Contraseña: " + objCliente.getContrasenaC() + "\n"
                         + "Recuerda revisar tus reservas en nuestra plataforma. Y CAMBIAR TU CONTRASEÑA \n\n"
                         + "Que tengas un lindo día " + objPer.getNombre();
                 String AsuntoNU = "HospedajeReal | Nueva contraseña " + objPer.getNombre();
                 if (objEml.enviarCorreo(correo, MensajeNU, AsuntoNU, null)) {
-                    out.println("<script type='application/javascript'> alert('Se te notificará al correo " + objPer.getCorreo()+ " tu nueva contraseña.'); </script>");
+                    out.println("<script type='application/javascript'> alert('Se te notificará al correo " + objPer.getCorreo() + " tu nueva contraseña.'); </script>");
                 }
-            } else {
-                id_cliente = request.getSession().getAttribute("user").toString();
-                objClienDAO.infoCliente(id_cliente).getId_PerosonaFK();
-                objPer = objPerDAO.infoUser(objClienDAO.infoCliente(id_cliente).getId_PerosonaFK());
-                correo = objPer.getCorreo();
             }
+            correo = objPer.getCorreo();
 
             DAO_Reserva objResDAO = new DAO_Reserva();
             objRes = new DTO_Reserva(pago, empleado, id_cliente, nroPersona);
@@ -158,7 +178,7 @@ public class ServletReservar extends HttpServlet {
             }
 
         } catch (SQLException ex) {
-            out.println("</h2>" + ex.getLocalizedMessage() + "<br><br>" + ex.getSQLState() + " Cliente: "+cliente+"</h2>");
+            out.println("</h2>" + ex.getLocalizedMessage() + "<br><br>" + ex.getSQLState() + " Cliente: " + cliente + " <br> y Sessión: " + request.getSession().getAttribute("user").toString() + "</h2>");
         }
 
         out.println("</div>");

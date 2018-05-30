@@ -406,7 +406,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <%if ((session.getAttribute("cliente") == null) && (session.getAttribute("usuarioN") == null)) {
+                                        <%if ((session.getAttribute("cliente") == null)) {
                                         %>
                                         <div class="form-group col-md-6">
                                             <div class="input-group">
@@ -679,11 +679,83 @@
                         </div>
                         <div class="tab-pane fade" id="v-pills-factura" role="tabpanel" aria-labelledby="v-pills-factura-tab">
                             <!-- Factura: Generar, digitar id_reserva -->
+                            <form method="POST" action="ServletFactura">
+                                <button type="submit" class="btn btn-primary" >Generar PDF</button>
+                            </form>
 
                         </div>
                         <div class="tab-pane fade" id="v-pills-usuario" role="tabpanel" aria-labelledby="v-pills-usuario-tab">
                             <!-- Usuario: Administración de usuarios digitar cedula de usuario.-->
+                            <form method="POST" action="Enviar">
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationDefault01">Nombre</label>
+                                        <input type="text" class="form-control" name="nombre" id="validationDefault01" placeholder="Nombre(s)" required>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationDefault02">Apellido</label>
+                                        <input type="text" class="form-control" name="apellido" id="validationDefault02" placeholder="Apellido(s)" required>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="select01">Nacionalidad</label>
+                                        <select id="select01" class="custom-select" name="nacionalidad">
+                                            <option selected>Selecciona una nacionalidad</option>
+                                            <%                                                        
+                                                for (int idx = 0; idx < lista.size(); idx++) {
+                                            %>
+                                            <option value="<% out.print(lista.get(idx).getId_Nacio()); %>"><% out.print(lista.get(idx).getPais_Origen());  %></option>
+                                            <%                                                        }
+                                            %>
+                                        </select>
+                                    </div>
 
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-2">
+                                        <label for="selectTipo">Tipo de documento</label>
+                                        <select id="selectTipo" class="custom-select" name="tipodoc">
+
+                                            <option selected>Tipo de Documento</option>
+                                            <%
+                                                for (int idy = 0; idy < listaD.size(); idy++) {
+                                            %>
+                                            <option value="<% out.print(listaD.get(idy).getId_Tipo_Doc()); %>"><% out.print(listaD.get(idy).getTipo_Docu());  %></option>
+                                            <%                                                        }
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-2">
+                                        <label for="doc">Documento:</label>
+                                        <input type="number" id="doc" class="form-control" placeholder="Ingresa el documento" required name="doc">
+                                    </div>                                            
+                                    <div class="col-md-4 mb-2">
+                                        <label for="Correo">Correo</label>
+                                        <input type="email" id="Correo" class="form-control" placeholder="Digite su correo" required name="correo">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="modal fade" id="registroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Registrarse</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>¿Has enviado todos los datos?</p>
+                                                <hr>
+                                                <p>De ser cierto, te llegará un correo que te permitirá acceder a la plataforma, allí te enviaremos tu nueva contraseña.</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerar</button>
+                                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
 
 
